@@ -2,114 +2,225 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --marq-ivory: #fafaf8;
+    --marq-paper: #ffffff;
+    --marq-sand: #f3f2eb;
+    --marq-ink: #1a1a1a;
+    --marq-ink-2: #4a4a4a;
+    --marq-mute: #737373;
+    --marq-gold: #c9a961;
+    --marq-gold-deep: #b39556;
+    --marq-line: rgba(26, 26, 26, 0.1);
+    --marq-gold-soft: rgba(201, 169, 97, 0.12);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     margin: 0;
-    font-family:
-        -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-        "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-        sans-serif;
+    background: var(--marq-ivory);
+    color: var(--marq-ink);
+    font-family: "Outfit", system-ui, sans-serif;
+    font-weight: 400;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-    font-family:
-        source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+.font-serif {
+    font-family: "Cormorant Garamond", serif;
+}
+
+.font-sans-marq {
+    font-family: "Outfit", sans-serif;
+}
+
+::selection {
+    background: var(--marq-gold);
+    color: #ffffff;
 }
 
 @layer base {
     :root {
-        --background: 0 0% 100%;
-        --foreground: 0 0% 3.9%;
+        --background: 48 24% 97%;
+        --foreground: 0 0% 10%;
         --card: 0 0% 100%;
-        --card-foreground: 0 0% 3.9%;
+        --card-foreground: 0 0% 10%;
         --popover: 0 0% 100%;
-        --popover-foreground: 0 0% 3.9%;
-        --primary: 0 0% 9%;
+        --popover-foreground: 0 0% 10%;
+        --primary: 0 0% 10%;
         --primary-foreground: 0 0% 98%;
-        --secondary: 0 0% 96.1%;
-        --secondary-foreground: 0 0% 9%;
-        --muted: 0 0% 96.1%;
-        --muted-foreground: 0 0% 45.1%;
-        --accent: 0 0% 96.1%;
-        --accent-foreground: 0 0% 9%;
+        --secondary: 48 18% 93%;
+        --secondary-foreground: 0 0% 10%;
+        --muted: 48 18% 93%;
+        --muted-foreground: 0 0% 45%;
+        --accent: 41 49% 58%;
+        --accent-foreground: 0 0% 100%;
         --destructive: 0 84.2% 60.2%;
         --destructive-foreground: 0 0% 98%;
-        --border: 0 0% 89.8%;
-        --input: 0 0% 89.8%;
-        --ring: 0 0% 3.9%;
-        --chart-1: 12 76% 61%;
-        --chart-2: 173 58% 39%;
-        --chart-3: 197 37% 24%;
-        --chart-4: 43 74% 66%;
-        --chart-5: 27 87% 67%;
-        --radius: 0.5rem;
+        --border: 0 0% 90%;
+        --input: 0 0% 90%;
+        --ring: 41 49% 58%;
+        --radius: 0.25rem;
     }
-    .dark {
-        --background: 0 0% 3.9%;
-        --foreground: 0 0% 98%;
-        --card: 0 0% 3.9%;
-        --card-foreground: 0 0% 98%;
-        --popover: 0 0% 3.9%;
-        --popover-foreground: 0 0% 98%;
-        --primary: 0 0% 98%;
-        --primary-foreground: 0 0% 9%;
-        --secondary: 0 0% 14.9%;
-        --secondary-foreground: 0 0% 98%;
-        --muted: 0 0% 14.9%;
-        --muted-foreground: 0 0% 63.9%;
-        --accent: 0 0% 14.9%;
-        --accent-foreground: 0 0% 98%;
-        --destructive: 0 62.8% 30.6%;
-        --destructive-foreground: 0 0% 98%;
-        --border: 0 0% 14.9%;
-        --input: 0 0% 14.9%;
-        --ring: 0 0% 83.1%;
-        --chart-1: 220 70% 50%;
-        --chart-2: 160 60% 45%;
-        --chart-3: 30 80% 55%;
-        --chart-4: 280 65% 60%;
-        --chart-5: 340 75% 55%;
+}
+
+@layer utilities {
+    .text-overline {
+        font-size: 0.75rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        font-weight: 500;
     }
+    .marq-gold {
+        color: var(--marq-gold);
+    }
+    .bg-marq-gold {
+        background-color: var(--marq-gold);
+    }
+    .border-marq-gold {
+        border-color: var(--marq-gold);
+    }
+    .marq-hairline {
+        border-color: var(--marq-line);
+    }
+}
+
+/* Reveal animation */
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+        opacity 0.9s ease,
+        transform 0.9s ease;
+    will-change: opacity, transform;
+}
+.reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Underline link */
+.link-gold {
+    position: relative;
+    color: var(--marq-ink);
+    transition: color 0.25s ease;
+}
+.link-gold::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 0;
+    height: 1px;
+    background: var(--marq-gold);
+    transition: width 0.35s ease;
+}
+.link-gold:hover {
+    color: var(--marq-gold);
+}
+.link-gold:hover::after {
+    width: 100%;
+}
+
+/* Minimal underline input style */
+.marq-input {
+    width: 100%;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid rgba(26, 26, 26, 0.2);
+    padding: 0.6rem 0;
+    font-family: "Outfit", sans-serif;
+    font-size: 0.95rem;
+    color: var(--marq-ink);
+    outline: none;
+    transition: border-color 0.25s ease;
+    border-radius: 0;
+    appearance: none;
+}
+.marq-input:focus {
+    border-bottom-color: var(--marq-gold);
+}
+.marq-input::placeholder {
+    color: rgba(26, 26, 26, 0.4);
+}
+
+select.marq-input {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231A1A1A' stroke-width='1.5'%3e%3cpath d='m6 9 6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0 center;
+    background-size: 18px;
+    padding-right: 26px;
+}
+
+/* Button primary (gold) */
+.btn-gold {
+    background: var(--marq-gold);
+    color: #fff;
+    padding: 0.85rem 1.6rem;
+    font-family: "Outfit", sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border: 1px solid var(--marq-gold);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+.btn-gold:hover {
+    background: var(--marq-gold-deep);
+    border-color: var(--marq-gold-deep);
+}
+.btn-gold:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Button outline (charcoal -> gold) */
+.btn-outline {
+    background: transparent;
+    color: var(--marq-ink);
+    padding: 0.85rem 1.6rem;
+    font-family: "Outfit", sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border: 1px solid var(--marq-ink);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.btn-outline:hover {
+    background: var(--marq-ink);
+    color: #fff;
+    border-color: var(--marq-ink);
+}
+
+/* Image zoom on hover */
+.zoom-img {
+    overflow: hidden;
+}
+.zoom-img img {
+    transition: transform 0.7s ease;
+}
+.zoom-img:hover img {
+    transform: scale(1.06);
+}
+
+/* Vertical divider line */
+.gold-rule {
+    width: 48px;
+    height: 1px;
+    background: var(--marq-gold);
+    display: inline-block;
 }
 
 @layer base {
     * {
         @apply border-border;
-    }
-    body {
-        @apply bg-background text-foreground;
-    }
-}
-
-@layer base {
-    [data-debug-wrapper="true"] {
-        display: contents !important;
-    }
-
-    [data-debug-wrapper="true"] > * {
-        margin-left: inherit;
-        margin-right: inherit;
-        margin-top: inherit;
-        margin-bottom: inherit;
-        padding-left: inherit;
-        padding-right: inherit;
-        padding-top: inherit;
-        padding-bottom: inherit;
-        column-gap: inherit;
-        row-gap: inherit;
-        gap: inherit;
-        border-left-width: inherit;
-        border-right-width: inherit;
-        border-top-width: inherit;
-        border-bottom-width: inherit;
-        border-left-style: inherit;
-        border-right-style: inherit;
-        border-top-style: inherit;
-        border-bottom-style: inherit;
-        border-left-color: inherit;
-        border-right-color: inherit;
-        border-top-color: inherit;
-        border-bottom-color: inherit;
     }
 }
