@@ -15,7 +15,7 @@ const TYPES = [
       "Built for long-term capital appreciation",
     ],
     image:
-      "https://customer-assets.emergentagent.com/job_launch-demo-5/artifacts/19ncerm3_commercial.png",
+      "https://customer-assets.emergentagent.com/job_launch-demo-5/artifacts/iuf9x9wu_commercial.png",
   },
   {
     key: "retail",
@@ -28,7 +28,7 @@ const TYPES = [
       "Optimised lease structures and ROI",
     ],
     image:
-      "https://customer-assets.emergentagent.com/job_launch-demo-5/artifacts/k0cuzjoa_retail.png",
+      "https://customer-assets.emergentagent.com/job_launch-demo-5/artifacts/q95t4mfq_retail.png",
   },
   {
     key: "land",
@@ -41,7 +41,7 @@ const TYPES = [
       "Strong appreciation & development potential",
     ],
     image:
-      "https://images.pexels.com/photos/16408959/pexels-photo-16408959.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=900&w=940",
+      "https://customer-assets.emergentagent.com/job_launch-demo-5/artifacts/levlxt0t_land%20png.png",
   },
   {
     key: "residential",
@@ -54,7 +54,7 @@ const TYPES = [
       "Healthy rental yields & resale demand",
     ],
     image:
-      "https://images.unsplash.com/photo-1705326701287-346fc37a2c86?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzN8MHwxfHNlYXJjaHwzfHxtb2Rlcm4lMjBsdXh1cnklMjBsaXZpbmclMjByb29tJTIwaW50ZXJpb3J8ZW58MHx8fHwxNzgwNDgyODA3fDA&ixlib=rb-4.1.0&q=85",
+      "https://customer-assets.emergentagent.com/job_launch-demo-5/artifacts/yjj88b0l_residential.png",
   },
 ];
 

@@ -29,7 +29,7 @@ const LETTERS = [
 ];
 
 const IMG_PRIMARY =
-  "https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=1200&q=80";
+  "https://customer-assets.emergentagent.com/job_launch-demo-5/artifacts/cpxxhhwh_why1.png";
 const IMG_SECONDARY =
   "https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=900&w=900";
 
