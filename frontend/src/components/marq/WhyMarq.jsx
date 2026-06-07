@@ -62,11 +62,11 @@ export default function WhyMarq() {
               <div className="zoom-img absolute top-0 left-0 w-[78%] h-full overflow-hidden bg-white/5">
                 <img
                   src={IMG_PRIMARY}
-                  alt="Skyline view"
-                  className="w-full h-full object-cover"
+                  alt="The MARQ Difference"
+                  className="w-full h-full object-cover object-left"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
-                <div className="absolute top-5 left-5 tag-pill dark">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                <div className="absolute top-5 right-5 tag-pill dark">
                   <span className="w-1.5 h-1.5 rounded-full bg-[var(--marq-gold)]" />
                   The MARQ Difference
                 </div>
