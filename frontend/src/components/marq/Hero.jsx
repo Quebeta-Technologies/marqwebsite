@@ -53,7 +53,7 @@ export default function Hero() {
     >
       <div
         ref={emblaRef}
-        className="embla relative w-full h-[680px] sm:h-[760px] lg:h-[860px]"
+        className="embla relative w-full h-[100svh] min-h-[640px] max-h-[900px]"
       >
         <div className="embla__container h-full">
           {SLIDES.map((s, i) => (
@@ -67,11 +67,11 @@ export default function Hero() {
                 alt={s.titleA}
                 className="absolute inset-0 w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/30" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/30" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30" />
 
               <div className="relative z-10 h-full">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full grid grid-cols-1 lg:grid-cols-12 gap-10 items-center pt-28 lg:pt-20 pb-16">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full grid grid-cols-1 lg:grid-cols-12 gap-10 items-center pt-20 pb-20">
                   {/* Copy */}
                   <div className="lg:col-span-7 text-white">
                     <div className="tag-pill dark">
@@ -80,7 +80,7 @@ export default function Hero() {
                     </div>
                     <h1
                       data-testid="hero-headline"
-                      className="font-display mt-7 text-white leading-[0.92] text-5xl sm:text-6xl lg:text-[5.5rem]"
+                      className="font-display mt-7 text-white leading-[0.95] text-5xl sm:text-6xl lg:text-[5.25rem]"
                     >
                       {s.titleA}
                       <br />
@@ -114,11 +114,11 @@ export default function Hero() {
           ))}
         </div>
 
-        {/* Floating enquiry card overlaying carousel */}
-        <div className="absolute z-20 right-4 sm:right-8 lg:right-12 top-1/2 -translate-y-1/2 w-[92%] sm:w-[420px] hidden md:block">
+        {/* Floating enquiry card — wider */}
+        <div className="absolute z-20 right-4 sm:right-8 lg:right-12 top-1/2 -translate-y-1/2 w-[92%] sm:w-[500px] hidden md:block">
           <div
             data-testid="hero-enquiry-card"
-            className="glass-card p-7 lg:p-8"
+            className="glass-card p-7 lg:p-9"
           >
             <div className="flex items-center gap-3 mb-4">
               <span className="gold-rule" />
@@ -127,13 +127,16 @@ export default function Hero() {
               </span>
             </div>
             <h3 className="font-display text-3xl text-[var(--marq-ink)] leading-tight">
-              Tell us what you&rsquo;re <span className="font-italic-serif text-[var(--marq-gold-deep)]">looking for</span>
+              Tell us what you&rsquo;re{" "}
+              <span className="font-italic-serif text-[var(--marq-gold-deep)]">
+                looking for
+              </span>
             </h3>
             <p className="mt-2 text-sm text-[var(--marq-mute)]">
               An advisor reaches out within 24 hours.
             </p>
             <div className="mt-5">
-              <EnquiryForm source="hero" testIdPrefix="hero" />
+              <EnquiryForm source="hero" testIdPrefix="hero" showEmail />
             </div>
           </div>
         </div>
@@ -200,7 +203,11 @@ export default function Hero() {
             Tell us what you&rsquo;re looking for
           </h3>
           <div className="mt-5">
-            <EnquiryForm source="hero" testIdPrefix="hero-mobile" />
+            <EnquiryForm
+              source="hero"
+              testIdPrefix="hero-mobile"
+              showEmail
+            />
           </div>
         </div>
       </div>

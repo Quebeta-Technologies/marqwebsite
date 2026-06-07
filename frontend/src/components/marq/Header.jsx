@@ -19,15 +19,27 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 16);
+    const onScroll = () => setScrolled(window.scrollY > 80);
     window.addEventListener("scroll", onScroll);
+    onScroll();
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // When over hero (not scrolled): transparent, light text
+  // When scrolled: solid glass, dark text
+  const onHero = !scrolled;
+
   return (
-    <header data-testid="site-header" className="sticky top-0 z-50">
-      {/* Top contact bar */}
-      <div className="bg-[var(--marq-ink)] text-white/80">
+    <header
+      data-testid="site-header"
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+    >
+      {/* Top contact bar (only visible after scroll OR always thin) */}
+      <div
+        className={`transition-all duration-500 overflow-hidden ${
+          onHero ? "max-h-0 opacity-0" : "max-h-12 opacity-100"
+        } bg-[var(--marq-ink)] text-white/80`}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between text-xs">
           <div className="flex items-center gap-5">
             <a
@@ -53,10 +65,10 @@ export default function Header() {
 
       {/* Main nav */}
       <div
-        className={`transition-all duration-300 ${
-          scrolled
-            ? "bg-white/90 backdrop-blur-xl border-b border-[var(--marq-line)]"
-            : "bg-white/70 backdrop-blur-md"
+        className={`transition-all duration-500 ${
+          onHero
+            ? "bg-transparent"
+            : "bg-white/92 backdrop-blur-xl border-b border-[var(--marq-line)]"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
@@ -64,7 +76,10 @@ export default function Header() {
             <img
               src={LOGO_URL}
               alt="MARQ Realtors"
-              className="h-12 w-auto object-contain"
+              className={`h-12 w-auto object-contain transition-all duration-500 ${
+                onHero ? "brightness-0 invert-0" : ""
+              }`}
+              style={onHero ? { filter: "brightness(0) invert(1)" } : undefined}
             />
           </a>
 
@@ -74,7 +89,11 @@ export default function Header() {
                 key={item.href}
                 href={item.href}
                 data-testid={`nav-${item.label.replace(/\s+/g, "-").toLowerCase()}`}
-                className="link-gold text-sm tracking-wide"
+                className={`text-sm tracking-wide transition-colors duration-300 relative ${
+                  onHero
+                    ? "text-white/85 hover:text-[var(--marq-gold-2)]"
+                    : "text-[var(--marq-ink)] hover:text-[var(--marq-gold)]"
+                }`}
               >
                 {item.label}
               </a>
@@ -85,13 +104,19 @@ export default function Header() {
             <a
               href="#advisor"
               data-testid="header-book-consultation"
-              className="hidden md:inline-flex btn-gold"
+              className={`hidden md:inline-flex transition-all duration-300 ${
+                onHero
+                  ? "border border-[var(--marq-gold-2)] text-[var(--marq-gold-2)] hover:bg-[var(--marq-gold-2)] hover:text-[var(--marq-ink)] px-6 py-3 text-[11px] tracking-[0.22em] uppercase font-semibold"
+                  : "btn-gold"
+              }`}
             >
               Book a Consultation
             </a>
             <button
               data-testid="mobile-menu-toggle"
-              className="lg:hidden p-2"
+              className={`lg:hidden p-2 ${
+                onHero ? "text-white" : "text-[var(--marq-ink)]"
+              }`}
               onClick={() => setOpen((v) => !v)}
               aria-label="Toggle menu"
             >

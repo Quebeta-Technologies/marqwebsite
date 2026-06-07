@@ -38,12 +38,13 @@ class StatusCheckCreate(BaseModel):
 class EnquiryCreate(BaseModel):
     # Source identifies which form sent the enquiry: hero | property | advisor
     source: Literal["hero", "property", "advisor"]
-    # Buy / Sell / JV
+    # Buy / Sell / Lease / JV
     purpose: Optional[str] = None
     # Commercial / Retail / Residential / Land
     property_type: Optional[str] = None
     name: Optional[str] = None
     mobile: Optional[str] = None
+    email: Optional[str] = None
     # Advisor form additional fields
     city: Optional[str] = None
     budget: Optional[str] = None

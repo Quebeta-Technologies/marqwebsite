@@ -1,5 +1,10 @@
 import useReveal from "@/hooks/useReveal";
+import useInView from "@/hooks/useInView";
+import useCountUp from "@/hooks/useCountUp";
 import { Sparkles, ShieldCheck, Compass, BadgeCheck } from "lucide-react";
+
+const ABOUT_IMG =
+  "https://customer-assets.emergentagent.com/job_launch-demo-5/artifacts/s5ddrz7z_about%20us%20image.png";
 
 const POINTS = [
   {
@@ -21,14 +26,45 @@ const POINTS = [
 ];
 
 const TRUST = [
-  { value: 25, suffix: "+", label: "Years of Experience" },
-  { value: 1.5, suffix: "K+", label: "Clients Served" },
-  { value: 18, suffix: "+", label: "Developer Tie-ups" },
-  { value: 100, suffix: "%", label: "Verified Projects" },
+  { value: 25, decimals: 0, suffix: "+", label: "Years of Experience" },
+  { value: 1.5, decimals: 1, suffix: "K+", label: "Clients Served" },
+  { value: 18, decimals: 0, suffix: "+", label: "Developer Tie-ups" },
+  { value: 100, decimals: 0, suffix: "%", label: "Verified Projects" },
 ];
+
+function TrustStat({ data, index, start }) {
+  const display = useCountUp(data.value, {
+    duration: 1800,
+    decimals: data.decimals,
+    start,
+  });
+  return (
+    <div
+      data-testid={`trust-${index}`}
+      className="p-8 lg:p-10 flex flex-col relative group"
+    >
+      <div className="flex items-baseline gap-1">
+        <span className="counter-number text-5xl sm:text-6xl text-white tabular-nums">
+          {display}
+        </span>
+        <span className="font-display text-3xl text-[var(--marq-gold-2)]">
+          {data.suffix}
+        </span>
+      </div>
+      <span className="mt-4 text-xs tracking-[0.22em] uppercase text-white/55">
+        {data.label}
+      </span>
+      <div className="loader-bar mt-5 !bg-white/10">
+        <span style={{ animationDelay: `${index * 0.15 + 0.2}s` }} />
+      </div>
+    </div>
+  );
+}
 
 export default function About() {
   const ref = useReveal();
+  const [trustRef, trustInView] = useInView({ threshold: 0.25 });
+
   return (
     <section
       id="about"
@@ -42,23 +78,14 @@ export default function About() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
           {/* Image */}
           <div className="lg:col-span-6 relative">
-            <div className="zoom-img relative aspect-[4/5] overflow-hidden bg-[var(--marq-sand)]">
+            <div className="zoom-img relative aspect-square overflow-hidden bg-[var(--marq-ink)]">
               <img
-                src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80"
-                alt="MARQ Realtors — Premium real estate advisory"
+                src={ABOUT_IMG}
+                alt="About MARQ Realtors"
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-              <div className="absolute bottom-6 left-6 right-6 text-white">
-                <div className="text-overline text-[var(--marq-gold-2)]">
-                  Est. 2000
-                </div>
-                <div className="font-display text-2xl mt-1">
-                  Trusted across Pune & Mumbai
-                </div>
-              </div>
             </div>
-            {/* Floating gold accent */}
+            {/* Decorative frames */}
             <div className="absolute -bottom-6 -right-6 w-32 h-32 border border-[var(--marq-gold)]/50 -z-0 hidden lg:block" />
             <div className="absolute -top-6 -left-6 w-24 h-24 bg-[var(--marq-gold)]/10 -z-0 hidden lg:block" />
           </div>
@@ -112,32 +139,28 @@ export default function About() {
           </div>
         </div>
 
-        {/* Trust strip with loader bars */}
+        {/* Trust strip — black background, count-up on scroll */}
         <div
+          ref={trustRef}
           data-testid="trust-strip"
-          className="mt-20 sm:mt-28 grid grid-cols-2 lg:grid-cols-4 gap-px bg-[var(--marq-line)] border border-[var(--marq-line)]"
+          style={{ background: "var(--marq-ink)" }}
+          className="mt-20 sm:mt-28 grid grid-cols-2 lg:grid-cols-4 gap-px relative overflow-hidden"
         >
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 opacity-[0.08] z-0"
+            style={{
+              background:
+                "radial-gradient(circle at 30% 50%, var(--marq-gold) 0%, transparent 60%)",
+            }}
+          />
           {TRUST.map((t, i) => (
-            <div
+            <TrustStat
               key={t.label}
-              data-testid={`trust-${i}`}
-              className="bg-[var(--marq-paper)] p-8 lg:p-10 flex flex-col"
-            >
-              <div className="flex items-baseline gap-1">
-                <span className="counter-number text-5xl sm:text-6xl text-[var(--marq-ink)]">
-                  {t.value}
-                </span>
-                <span className="font-display text-3xl text-[var(--marq-gold)]">
-                  {t.suffix}
-                </span>
-              </div>
-              <span className="mt-4 text-xs tracking-[0.2em] uppercase text-[var(--marq-mute)]">
-                {t.label}
-              </span>
-              <div className="loader-bar mt-5">
-                <span style={{ animationDelay: `${i * 0.15 + 0.2}s` }} />
-              </div>
-            </div>
+              data={t}
+              index={i}
+              start={trustInView}
+            />
           ))}
         </div>
       </div>

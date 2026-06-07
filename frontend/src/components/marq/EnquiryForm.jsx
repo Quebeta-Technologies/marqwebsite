@@ -4,24 +4,27 @@ import { submitEnquiry } from "@/lib/api";
 import { ArrowRight } from "lucide-react";
 
 /**
- * Compact 4-field enquiry form used in Hero & Property Enquiry sections.
+ * Compact enquiry form used in Hero & Property Enquiry sections.
  * Props:
  *  - source: "hero" | "property"
  *  - testIdPrefix: string for unique data-testids
  *  - typeOptions: array of property type strings
- *  - purposeOptions: array of purpose strings (e.g. ["Buy", "Sale", "JV"])
+ *  - purposeOptions: array of purpose strings (e.g. ["Buy", "Sell", "Lease", "JV"])
+ *  - showEmail: boolean — render an email field
  */
 export default function EnquiryForm({
   source,
   testIdPrefix,
   typeOptions = ["Commercial", "Retail", "Residential", "Land"],
   purposeOptions = ["Buy", "Sell", "Lease", "JV"],
+  showEmail = false,
 }) {
   const [form, setForm] = useState({
     purpose: "",
     property_type: "",
     name: "",
     mobile: "",
+    email: "",
   });
   const [submitting, setSubmitting] = useState(false);
 
@@ -36,8 +39,14 @@ export default function EnquiryForm({
     setSubmitting(true);
     try {
       await submitEnquiry({ source, ...form });
-      toast.success("Request Received. Let’s Find Your Perfect Investment.");
-      setForm({ purpose: "", property_type: "", name: "", mobile: "" });
+      toast.success("Request Received. Let's Find Your Perfect Investment.");
+      setForm({
+        purpose: "",
+        property_type: "",
+        name: "",
+        mobile: "",
+        email: "",
+      });
     } catch (err) {
       toast.error("Could not send enquiry. Please try again.");
     } finally {
@@ -88,7 +97,7 @@ export default function EnquiryForm({
             ))}
           </select>
         </div>
-        <div>
+        <div className={showEmail ? "" : "sm:col-span-2"}>
           <label className="text-overline text-[var(--marq-mute)] block mb-1">
             Name
           </label>
@@ -101,7 +110,22 @@ export default function EnquiryForm({
             onChange={(e) => update("name", e.target.value)}
           />
         </div>
-        <div>
+        {showEmail && (
+          <div>
+            <label className="text-overline text-[var(--marq-mute)] block mb-1">
+              Email
+            </label>
+            <input
+              data-testid={`${testIdPrefix}-email`}
+              className="marq-input"
+              type="email"
+              placeholder="you@example.com"
+              value={form.email}
+              onChange={(e) => update("email", e.target.value)}
+            />
+          </div>
+        )}
+        <div className="sm:col-span-2">
           <label className="text-overline text-[var(--marq-mute)] block mb-1">
             Mobile No.
           </label>

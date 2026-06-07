@@ -1,35 +1,58 @@
+import { useState } from "react";
 import useReveal from "@/hooks/useReveal";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowRight, Check } from "lucide-react";
 
 const TYPES = [
   {
     key: "commercial",
     title: "Commercial",
-    body:
-      "Premium commercial spaces in strategic business locations with strong visibility, rental potential, and long-term appreciation.",
+    tag: "Grade A · Office",
+    line: "Premium commercial spaces engineered for visibility, productivity and long-term yield.",
+    bullets: [
+      "Grade-A offices in CBDs & IT corridors",
+      "Strong rental potential and tenant demand",
+      "Built for long-term capital appreciation",
+    ],
     image:
       "https://images.unsplash.com/photo-1621831337128-35676ca30868?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2ODh8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBjb21tZXJjaWFsJTIwb2ZmaWNlJTIwYnVpbGRpbmclMjBleHRlcmlvcnxlbnwwfHx8fDE3ODA0ODI4MDd8MA&ixlib=rb-4.1.0&q=85",
   },
   {
     key: "retail",
     title: "Retail",
-    body:
-      "High-potential retail opportunities designed for footfall, visibility, and strong return potential on high streets and malls.",
+    tag: "High Street · Mall",
+    line: "Footfall-led retail addresses on prime high streets and inside marquee malls.",
+    bullets: [
+      "High-visibility, high-traffic frontage",
+      "Anchor tenant ecosystems and brand mix",
+      "Optimised lease structures and ROI",
+    ],
     image:
       "https://images.pexels.com/photos/8122150/pexels-photo-8122150.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=900&w=940",
   },
   {
     key: "land",
     title: "Land",
-    body:
-      "Strategic land parcels with future development potential and long-term appreciation across growth corridors.",
+    tag: "Growth Corridor",
+    line: "Strategic land parcels positioned along Maharashtra's most active growth corridors.",
+    bullets: [
+      "Clear-title parcels with verified diligence",
+      "Located along upcoming infra corridors",
+      "Strong appreciation & development potential",
+    ],
     image:
       "https://images.pexels.com/photos/16408959/pexels-photo-16408959.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=900&w=940",
   },
   {
     key: "residential",
     title: "Residential",
-    body:
-      "Discover residential properties that balance lifestyle, location, and investment value for end use or portfolio growth.",
+    tag: "Luxury Living",
+    line: "Curated residences that pair iconic addresses with strong investment fundamentals.",
+    bullets: [
+      "Prime addresses across Pune & Mumbai",
+      "Branded, design-led, RERA-approved homes",
+      "Healthy rental yields & resale demand",
+    ],
     image:
       "https://images.unsplash.com/photo-1705326701287-346fc37a2c86?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzN8MHwxfHNlYXJjaHwzfHxtb2Rlcm4lMjBsdXh1cnklMjBsaXZpbmclMjByb29tJTIwaW50ZXJpb3J8ZW58MHx8fHwxNzgwNDgyODA3fDA&ixlib=rb-4.1.0&q=85",
   },
@@ -37,11 +60,19 @@ const TYPES = [
 
 export default function PropertyTypes() {
   const ref = useReveal();
+  const [active, setActive] = useState(0);
+  const current = TYPES[active];
+
+  // Build deck order — other cards excluding active
+  const deck = TYPES.map((t, i) => ({ ...t, originalIndex: i })).filter(
+    (t) => t.originalIndex !== active
+  );
+
   return (
     <section
       id="types"
       data-testid="property-types-section"
-      className="bg-[var(--marq-paper)] border-y border-[var(--marq-line)]"
+      className="bg-[var(--marq-paper)] border-y border-[var(--marq-line)] relative overflow-hidden"
     >
       <div
         ref={ref}
@@ -68,43 +99,119 @@ export default function PropertyTypes() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {TYPES.map((t, i) => (
-            <article
-              key={t.key}
-              data-testid={`type-${t.key}`}
-              className="group relative bg-white border border-[var(--marq-line)] overflow-hidden"
-            >
-              <div className="zoom-img relative h-72 overflow-hidden">
-                <img
-                  src={t.image}
-                  alt={t.title}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/0 to-transparent" />
-                <span className="absolute top-4 left-4 text-overline text-white/85 bg-black/40 backdrop-blur px-2.5 py-1">
-                  0{i + 1}
-                </span>
-                <div className="absolute bottom-4 left-4 right-4 text-white">
-                  <h3 className="font-display text-2xl leading-tight">
-                    {t.title}
-                  </h3>
+        {/* Featured + deck layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+          {/* Active full card */}
+          <div className="lg:col-span-9 relative">
+            <AnimatePresence mode="wait">
+              <motion.article
+                key={current.key}
+                initial={{ opacity: 0, y: 24, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -16, scale: 0.98 }}
+                transition={{ duration: 0.5, ease: [0.2, 0.7, 0.2, 1] }}
+                data-testid={`type-active-${current.key}`}
+                className="grid grid-cols-1 md:grid-cols-2 bg-white border border-[var(--marq-line)] overflow-hidden min-h-[480px] shadow-[0_30px_60px_-30px_rgba(13,13,13,0.18)]"
+              >
+                <div className="relative overflow-hidden bg-[var(--marq-sand)] order-1 md:order-1">
+                  <img
+                    src={current.image}
+                    alt={current.title}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
+                  <span className="absolute top-5 left-5 text-overline bg-[var(--marq-ink)] text-[var(--marq-gold-2)] px-3 py-1.5">
+                    0{active + 1} · {current.tag}
+                  </span>
                 </div>
-              </div>
-              <div className="p-6">
-                <p className="text-sm text-[var(--marq-ink-2)] leading-relaxed min-h-[80px]">
-                  {t.body}
-                </p>
-                <a
-                  href="#enquire"
-                  data-testid={`type-${t.key}-cta`}
-                  className="mt-5 inline-flex items-center gap-2 text-sm text-[var(--marq-ink)] link-gold"
+                <div className="p-8 lg:p-12 flex flex-col order-2 md:order-2">
+                  <div className="text-overline text-[var(--marq-gold-deep)]">
+                    {current.tag}
+                  </div>
+                  <h3 className="mt-4 font-display text-4xl lg:text-5xl text-[var(--marq-ink)] leading-[1.05]">
+                    {current.title}
+                  </h3>
+                  <p className="mt-5 text-base text-[var(--marq-ink-2)] leading-relaxed">
+                    {current.line}
+                  </p>
+                  <ul className="mt-7 space-y-3.5">
+                    {current.bullets.map((b) => (
+                      <li key={b} className="flex items-start gap-3 text-sm">
+                        <span className="w-5 h-5 mt-0.5 flex-shrink-0 flex items-center justify-center bg-[var(--marq-ink)] text-[var(--marq-gold-2)]">
+                          <Check size={11} strokeWidth={2.2} />
+                        </span>
+                        <span className="text-[var(--marq-ink-2)] leading-snug">
+                          {b}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-auto pt-10">
+                    <a
+                      href="#enquire"
+                      data-testid={`type-${current.key}-cta`}
+                      className="btn-gold"
+                    >
+                      Explore Now
+                      <ArrowRight size={15} strokeWidth={1.5} />
+                    </a>
+                  </div>
+                </div>
+              </motion.article>
+            </AnimatePresence>
+          </div>
+
+          {/* Deck of remaining cards */}
+          <div className="lg:col-span-3 relative">
+            <div className="text-overline text-[var(--marq-mute)] mb-4">
+              Browse
+            </div>
+            <div className="relative flex flex-col gap-3">
+              {deck.map((t, i) => (
+                <motion.button
+                  key={t.key}
+                  type="button"
+                  layout
+                  initial={false}
+                  data-testid={`type-deck-${t.key}`}
+                  onClick={() => setActive(t.originalIndex)}
+                  whileHover={{ x: -6 }}
+                  transition={{ duration: 0.35, ease: [0.2, 0.7, 0.2, 1] }}
+                  style={{
+                    marginTop: i === 0 ? 0 : -28,
+                    zIndex: deck.length - i,
+                  }}
+                  className="group relative w-full text-left bg-white border border-[var(--marq-line)] overflow-hidden hover:border-[var(--marq-gold)] hover:shadow-[0_20px_40px_-20px_rgba(13,13,13,0.35)] transition-all duration-500"
                 >
-                  Explore {t.title} →
-                </a>
-              </div>
-            </article>
-          ))}
+                  <div className="flex items-center gap-4 p-3 pr-4">
+                    <div className="relative w-20 h-20 flex-shrink-0 overflow-hidden bg-[var(--marq-sand)]">
+                      <img
+                        src={t.image}
+                        alt={t.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-[10px] tracking-[0.2em] uppercase text-[var(--marq-mute)]">
+                        0{t.originalIndex + 1}
+                      </div>
+                      <div className="font-display text-lg text-[var(--marq-ink)] leading-tight">
+                        {t.title}
+                      </div>
+                      <div className="mt-0.5 text-[11px] text-[var(--marq-mute)] truncate">
+                        {t.tag}
+                      </div>
+                    </div>
+                    <ArrowRight
+                      size={16}
+                      strokeWidth={1.4}
+                      className="text-[var(--marq-mute)] group-hover:text-[var(--marq-gold)] group-hover:translate-x-1 transition-all duration-300 flex-shrink-0"
+                    />
+                  </div>
+                </motion.button>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -28,6 +28,11 @@ const LETTERS = [
   },
 ];
 
+const IMG_PRIMARY =
+  "https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=1200&q=80";
+const IMG_SECONDARY =
+  "https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=900&w=900";
+
 export default function WhyMarq() {
   const ref = useReveal();
   const [active, setActive] = useState(0);
@@ -50,32 +55,52 @@ export default function WhyMarq() {
         className="reveal max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 relative"
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
-          {/* LHS Image */}
+          {/* LHS — two overlapping images */}
           <div className="lg:col-span-5">
-            <div className="relative">
-              <div className="zoom-img aspect-[4/5] overflow-hidden bg-white/5 relative">
+            <div className="relative pb-20 pr-12 sm:pb-24 sm:pr-16">
+              {/* Primary image (top-left) */}
+              <div className="zoom-img relative w-[80%] aspect-[3/4] overflow-hidden bg-white/5">
                 <img
-                  src="https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=1200&q=80"
-                  alt="MARQ Realtors — Premium advisory"
+                  src={IMG_PRIMARY}
+                  alt="Skyline view"
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
-                <div className="absolute top-6 left-6 tag-pill dark">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
+                <div className="absolute top-5 left-5 tag-pill dark">
                   <span className="w-1.5 h-1.5 rounded-full bg-[var(--marq-gold)]" />
                   The MARQ Difference
                 </div>
-                <div className="absolute bottom-6 left-6 right-6">
+                <div className="absolute bottom-5 left-5 right-5">
                   <div className="text-overline text-[var(--marq-gold-2)] mb-2">
                     Currently exploring
                   </div>
-                  <div className="font-display text-3xl leading-tight">
+                  <div className="font-display text-2xl leading-tight">
                     {LETTERS[active].title}
                   </div>
                 </div>
               </div>
+
+              {/* Secondary overlapping image (bottom-right) */}
+              <div className="absolute bottom-0 right-0 w-[58%] aspect-[4/5] overflow-hidden shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] border border-white/10">
+                <img
+                  src={IMG_SECONDARY}
+                  alt="Advisory team"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <div className="text-overline text-[var(--marq-gold-2)]">
+                    Est. 2000
+                  </div>
+                  <div className="font-display text-base mt-1">
+                    Advisory you can trust
+                  </div>
+                </div>
+              </div>
+
               {/* Decorative frames */}
-              <div className="absolute -bottom-5 -right-5 w-32 h-32 border border-[var(--marq-gold)]/60 hidden lg:block" />
-              <div className="absolute -top-5 -left-5 w-20 h-20 bg-[var(--marq-gold)]/15 hidden lg:block" />
+              <div className="absolute top-0 left-0 -translate-x-3 -translate-y-3 w-20 h-20 bg-[var(--marq-gold)]/15 hidden lg:block" />
+              <div className="absolute -bottom-3 right-3 w-28 h-28 border border-[var(--marq-gold)]/60 -z-10 hidden lg:block" />
             </div>
           </div>
 
