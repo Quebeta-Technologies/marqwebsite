@@ -6,7 +6,7 @@ import { ArrowRight, ShieldCheck, Sparkles, Headphones } from "lucide-react";
 
 const CITIES = ["Pune", "Mumbai"];
 const BUDGETS = ["50L – 1Cr", "1Cr – 2Cr", "2Cr – 5Cr", "5Cr +"];
-const REQUIREMENTS = ["Buy", "Sell", "Joint Venture"];
+const REQUIREMENTS = ["Buy", "Sell", "Lease", "Joint Venture"];
 
 const PERKS = [
   { icon: ShieldCheck, label: "Verified projects only" },

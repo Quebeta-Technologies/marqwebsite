@@ -15,7 +15,7 @@ export default function EnquiryForm({
   source,
   testIdPrefix,
   typeOptions = ["Commercial", "Retail", "Residential", "Land"],
-  purposeOptions = ["Buy", "Sale", "JV"],
+  purposeOptions = ["Buy", "Sell", "Lease", "JV"],
 }) {
   const [form, setForm] = useState({
     purpose: "",
@@ -62,7 +62,7 @@ export default function EnquiryForm({
             value={form.purpose}
             onChange={(e) => update("purpose", e.target.value)}
           >
-            <option value="">Buy / Sale / JV</option>
+            <option value="">Buy / Sell / Lease / JV</option>
             {purposeOptions.map((o) => (
               <option key={o} value={o}>
                 {o}

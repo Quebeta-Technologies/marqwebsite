@@ -22,7 +22,7 @@ export default function PropertyEnquiry() {
               </span>
             </div>
             <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl leading-[1.02] text-[var(--marq-ink)]">
-              Looking to Buy, Sell, or Explore a{" "}
+              Looking to Buy, Sell, Lease or Explore a{" "}
               <span className="font-italic-serif text-[var(--marq-gold)]">
                 JV Opportunity?
               </span>{" "}
@@ -51,8 +51,8 @@ export default function PropertyEnquiry() {
               <EnquiryForm
                 source="property"
                 testIdPrefix="property-enquiry"
-                purposeOptions={["Buy", "Sell", "JV"]}
-                typeOptions={["Commercial", "Land", "Residential"]}
+                purposeOptions={["Buy", "Sell", "Lease", "JV"]}
+                typeOptions={["Commercial", "Retail", "Land", "Residential"]}
               />
             </div>
           </div>

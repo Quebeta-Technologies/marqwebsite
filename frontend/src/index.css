@@ -24,23 +24,24 @@ body {
     margin: 0;
     background: var(--marq-ivory);
     color: var(--marq-ink);
-    font-family: "Manrope", system-ui, sans-serif;
+    font-family: "DM Sans", system-ui, sans-serif;
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
 .font-display {
-    font-family: "Fraunces", serif;
-    font-variation-settings: "opsz" 144, "SOFT" 50;
-    letter-spacing: -0.02em;
+    font-family: "Playfair Display", serif;
+    font-weight: 500;
+    letter-spacing: -0.015em;
 }
 .font-italic-serif {
     font-family: "Instrument Serif", serif;
     font-style: italic;
+    font-weight: 400;
 }
 .font-body {
-    font-family: "Manrope", sans-serif;
+    font-family: "DM Sans", sans-serif;
 }
 
 ::selection {
@@ -114,7 +115,7 @@ body {
     background: var(--marq-ink);
     color: var(--marq-gold);
     padding: 0.95rem 1.8rem;
-    font-family: "Manrope", sans-serif;
+    font-family: "DM Sans", sans-serif;
     font-size: 0.78rem;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -159,7 +160,7 @@ body {
     background: transparent;
     color: var(--marq-ink);
     padding: 0.95rem 1.8rem;
-    font-family: "Manrope", sans-serif;
+    font-family: "DM Sans", sans-serif;
     font-size: 0.78rem;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -183,7 +184,7 @@ body {
     border: 0;
     border-bottom: 1px solid rgba(13, 13, 13, 0.18);
     padding: 0.7rem 0;
-    font-family: "Manrope", sans-serif;
+    font-family: "DM Sans", sans-serif;
     font-size: 0.95rem;
     color: var(--marq-ink);
     outline: none;
@@ -389,8 +390,8 @@ select.marq-input-light {
 
 /* Counter style */
 .counter-number {
-    font-family: "Fraunces", serif;
-    font-weight: 400;
+    font-family: "Playfair Display", serif;
+    font-weight: 500;
     letter-spacing: -0.03em;
     line-height: 0.9;
 }

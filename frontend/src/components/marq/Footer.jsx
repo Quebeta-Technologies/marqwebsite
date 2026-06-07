@@ -1,16 +1,20 @@
-import { Phone, Mail, MapPin, Instagram } from "lucide-react";
+import { Phone, Mail, MapPin, Instagram, Heart } from "lucide-react";
 
 const LOGO_URL =
   "https://customer-assets.emergentagent.com/job_10da01c6-2660-45e2-8df9-aafabd9bb8ec/artifacts/zn4d3zw6_MARQ%20Logo.png";
 
 const COMPANY = ["Contact Us", "FAQ's", "Blogs", "Events", "New Launches"];
-const CATEGORIES = [
-  "Commercial",
-  "Land",
-  "Residential",
-  "Buy",
-  "Sell",
-  "JV",
+const LOOKING_TO = [
+  { label: "Buy", href: "#services" },
+  { label: "Sell", href: "#services" },
+  { label: "Lease", href: "#services" },
+  { label: "JV", href: "#services" },
+];
+const LOOKING_FOR = [
+  { label: "Commercial", href: "#types" },
+  { label: "Retail", href: "#types" },
+  { label: "Land", href: "#types" },
+  { label: "Residential", href: "#types" },
 ];
 
 export default function Footer() {
@@ -18,7 +22,7 @@ export default function Footer() {
     <footer data-testid="site-footer" className="bg-[var(--marq-ink)] text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          <div className="lg:col-span-5">
+          <div className="lg:col-span-4">
             <img
               src={LOGO_URL}
               alt="MARQ Realtors"
@@ -47,7 +51,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-2">
             <h4 className="text-overline text-[var(--marq-gold)] mb-5">
               Company
             </h4>
@@ -64,31 +68,53 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-            <h4 className="text-overline text-[var(--marq-gold)] mt-8 mb-5">
-              Property Categories
+          </div>
+
+          <div className="lg:col-span-2">
+            <h4 className="text-overline text-[var(--marq-gold)] mb-5">
+              Looking To
             </h4>
-            <ul className="grid grid-cols-2 gap-y-3 text-sm">
-              {CATEGORIES.map((c) => (
-                <li key={c}>
+            <ul className="space-y-3 text-sm">
+              {LOOKING_TO.map((c) => (
+                <li key={c.label}>
                   <a
-                    href="#types"
-                    data-testid={`footer-cat-${c.toLowerCase()}`}
+                    href={c.href}
+                    data-testid={`footer-to-${c.label.toLowerCase()}`}
                     className="text-white/70 hover:text-[var(--marq-gold)] transition-colors"
                   >
-                    {c}
+                    {c.label}
                   </a>
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="lg:col-span-4">
+          <div className="lg:col-span-2">
+            <h4 className="text-overline text-[var(--marq-gold)] mb-5">
+              Looking For
+            </h4>
+            <ul className="space-y-3 text-sm">
+              {LOOKING_FOR.map((c) => (
+                <li key={c.label}>
+                  <a
+                    href={c.href}
+                    data-testid={`footer-for-${c.label.toLowerCase()}`}
+                    className="text-white/70 hover:text-[var(--marq-gold)] transition-colors"
+                  >
+                    {c.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="lg:col-span-2">
             <h4 className="text-overline text-[var(--marq-gold)] mb-5">
               Get In Touch
             </h4>
             <ul className="space-y-4 text-sm text-white/75">
               <li className="flex items-start gap-3">
-                <Phone size={15} strokeWidth={1.5} className="mt-1 text-[var(--marq-gold)]" />
+                <Phone size={15} strokeWidth={1.5} className="mt-1 text-[var(--marq-gold)] flex-shrink-0" />
                 <a
                   href="tel:+918855055069"
                   data-testid="footer-phone"
@@ -98,11 +124,11 @@ export default function Footer() {
                 </a>
               </li>
               <li className="flex items-start gap-3">
-                <Mail size={15} strokeWidth={1.5} className="mt-1 text-[var(--marq-gold)]" />
+                <Mail size={15} strokeWidth={1.5} className="mt-1 text-[var(--marq-gold)] flex-shrink-0" />
                 <a
                   href="mailto:sales@marqrealtors.com"
                   data-testid="footer-email"
-                  className="hover:text-[var(--marq-gold)]"
+                  className="hover:text-[var(--marq-gold)] break-all"
                 >
                   sales@marqrealtors.com
                 </a>
@@ -113,34 +139,33 @@ export default function Footer() {
                   strokeWidth={1.5}
                   className="mt-1 text-[var(--marq-gold)] flex-shrink-0"
                 />
-                <span>
-                  Care Of Cultiv8 Coworking Space, Office No. 701 & 702, 7th
-                  Floor, Wing B, Sterling Towers, Pancard Club Road, Baner
-                  Gaon, Baner, Pune, Maharashtra 411069
+                <span className="text-xs leading-relaxed">
+                  Cultiv8 Coworking, Office 701-702, 7th Floor, Wing B,
+                  Sterling Towers, Pancard Club Road, Baner, Pune 411069
                 </span>
               </li>
             </ul>
-            <div className="mt-6 text-overline text-white/55">
-              Service Cities · Pune | Mumbai
-            </div>
           </div>
         </div>
 
-        <div className="mt-16 pt-8 border-t border-white/10 text-xs text-white/45 leading-relaxed">
-          <p className="max-w-4xl">
-            <strong className="text-white/65 font-medium">Disclaimer:</strong>{" "}
-            The information provided on this website is for general
-            informational purposes only. Property details, pricing,
-            availability, and approvals are subject to change without notice.
-            Please verify all information independently before making any
-            property decision.
-          </p>
-          <p className="mt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-            <span>© 2026 MARQ Realtors. All Rights Reserved.</span>
-            <span className="text-white/40">
-              Designed for the discerning investor.
+        <div className="mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-xs text-white/55">
+          <span>© 2026 MARQ Realtors. All Rights Reserved.</span>
+          <span
+            data-testid="footer-credit"
+            className="flex items-center gap-1.5"
+          >
+            Designed With{" "}
+            <Heart
+              size={13}
+              strokeWidth={0}
+              fill="#E63946"
+              className="text-[#E63946]"
+            />{" "}
+            From{" "}
+            <span className="text-white/80 font-medium tracking-wide">
+              Quebeta
             </span>
-          </p>
+          </span>
         </div>
       </div>
     </footer>

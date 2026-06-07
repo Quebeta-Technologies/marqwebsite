@@ -1,27 +1,42 @@
 import useReveal from "@/hooks/useReveal";
-import { Building2, Handshake, TrendingUp } from "lucide-react";
+import { Building2, TrendingUp, Handshake, Store } from "lucide-react";
 
 const ITEMS = [
   {
     key: "buy",
+    num: "01",
     title: "Buy",
     icon: Building2,
+    tagline: "Acquire the right asset with confidence.",
     body:
-      "Find the right property with the right strategy. We help you evaluate location, pricing, growth potential, and long-term value so your purchase is backed by insight, not impulse.",
+      "We help identify high-potential opportunities, evaluate market dynamics, conduct due diligence, and negotiate effectively — ensuring every acquisition aligns with your objectives and long-term vision.",
   },
   {
     key: "sell",
+    num: "02",
     title: "Sell",
     icon: TrendingUp,
+    tagline: "Maximize value through strategic positioning.",
     body:
-      "Sell with better positioning and better outcomes. From pricing strategy and market presentation to buyer alignment and negotiation support, we help you move your property with confidence.",
+      "From pricing and market presentation to buyer engagement and negotiations, we help unlock the full value of your property while ensuring a seamless transaction process.",
+  },
+  {
+    key: "lease",
+    num: "03",
+    title: "Lease Mandates",
+    icon: Store,
+    tagline: "Connect the right property with the right occupier.",
+    body:
+      "We assist property owners, developers, and businesses with tailored leasing solutions, helping secure quality tenants, optimize occupancy, and create sustainable value.",
   },
   {
     key: "jv",
-    title: "JV",
+    num: "04",
+    title: "Joint Ventures",
     icon: Handshake,
+    tagline: "Unlock the potential of land and development opportunities.",
     body:
-      "Explore joint venture opportunities with the right guidance. We help identify suitable partners, assess project potential, and structure opportunities that create long-term value for all stakeholders.",
+      "We facilitate strategic partnerships between landowners and developers, helping assess feasibility, structure agreements, and create projects that generate long-term value for all stakeholders.",
   },
 ];
 
@@ -31,56 +46,78 @@ export default function Services() {
     <section
       id="services"
       data-testid="services-section"
-      className="bg-[var(--marq-ivory)]"
+      className="bg-[var(--marq-ivory)] relative overflow-hidden"
     >
       <div
-        ref={ref}
-        className="reveal max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32"
+        aria-hidden
+        className="pointer-events-none absolute -bottom-12 -left-10 font-display italic text-[12rem] leading-none text-[var(--marq-ink)] opacity-[0.04] select-none"
       >
-        <div className="max-w-3xl">
-          <div className="flex items-center gap-3 mb-5">
-            <span className="gold-rule" />
-            <span className="text-overline text-[var(--marq-mute)]">
-              What we do
-            </span>
+        advisory
+      </div>
+
+      <div
+        ref={ref}
+        className="reveal max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 relative"
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-end mb-16">
+          <div className="lg:col-span-7">
+            <div className="flex items-center gap-3 mb-5">
+              <span className="gold-rule" />
+              <span className="text-overline text-[var(--marq-mute)]">
+                What We Do
+              </span>
+            </div>
+            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl leading-[1.05] text-[var(--marq-ink)]">
+              Strategic{" "}
+              <span className="font-italic-serif text-[var(--marq-gold)]">
+                real estate advisory.
+              </span>
+            </h2>
           </div>
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl leading-[1.02] text-[var(--marq-ink)]">
-            Buy <span className="text-[var(--marq-gold)]">•</span> Sell{" "}
-            <span className="text-[var(--marq-gold)]">•</span>{" "}
-            <span className="font-italic-serif text-[var(--marq-gold)]">JV</span>
-          </h2>
-          <p className="mt-6 text-base text-[var(--marq-ink-2)] leading-relaxed">
-            We help you buy, sell, and explore joint venture opportunities with
-            clarity and confidence. From identifying the right property or
-            partner to evaluating the opportunity and closing the deal, we
-            guide you at every step.
+          <p className="lg:col-span-5 text-base text-[var(--marq-ink-2)] leading-relaxed">
+            Real estate decisions shape long-term wealth, business growth, and
+            future opportunities. MARQ helps investors, landowners, developers,
+            and businesses navigate these decisions with clarity and
+            confidence. From acquisitions and disposals to leasing and joint
+            ventures, we combine market insight, strategic guidance, and
+            hands-on execution to deliver meaningful outcomes.
           </p>
         </div>
 
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
-          {ITEMS.map((s, i) => {
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {ITEMS.map((s) => {
             const Icon = s.icon;
             return (
               <article
                 key={s.key}
                 data-testid={`service-${s.key}`}
-                className="group bg-white border border-[var(--marq-line)] p-10 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                className="group relative bg-white border border-[var(--marq-line)] p-8 lg:p-10 hover:-translate-y-1 transition-all duration-500 hover:shadow-[0_30px_60px_-30px_rgba(13,13,13,0.25)] overflow-hidden"
               >
-                <div className="flex items-center justify-between">
-                  <span className="text-overline text-[var(--marq-gold)]">
-                    0{i + 1}
+                {/* Animated gold accent */}
+                <span className="absolute top-0 left-0 h-[2px] w-0 bg-[var(--marq-gold)] group-hover:w-full transition-all duration-700" />
+
+                <div className="flex items-start justify-between gap-6">
+                  <div>
+                    <div className="text-overline text-[var(--marq-gold-deep)]">
+                      {s.num}
+                    </div>
+                    <h3 className="mt-4 font-display text-3xl sm:text-4xl text-[var(--marq-ink)] leading-tight">
+                      {s.title}
+                    </h3>
+                  </div>
+                  <span className="w-14 h-14 flex-shrink-0 flex items-center justify-center border border-[var(--marq-line)] group-hover:border-[var(--marq-gold)] group-hover:bg-[var(--marq-gold)] transition-all duration-500">
+                    <Icon
+                      size={22}
+                      strokeWidth={1.3}
+                      className="text-[var(--marq-ink)] group-hover:text-white transition-colors duration-500"
+                    />
                   </span>
-                  <Icon
-                    size={26}
-                    strokeWidth={1.2}
-                    className="text-[var(--marq-ink)] group-hover:text-[var(--marq-gold)] transition-colors"
-                  />
                 </div>
-                <h3 className="mt-8 font-display text-3xl text-[var(--marq-ink)]">
-                  {s.title}
-                </h3>
-                <div className="mt-3 h-px w-10 bg-[var(--marq-gold)]" />
-                <p className="mt-5 text-sm text-[var(--marq-ink-2)] leading-relaxed">
+
+                <p className="mt-6 font-italic-serif text-xl text-[var(--marq-gold-deep)] leading-snug">
+                  {s.tagline}
+                </p>
+                <p className="mt-4 text-sm text-[var(--marq-ink-2)] leading-relaxed">
                   {s.body}
                 </p>
               </article>
