@@ -15,7 +15,7 @@ const TYPES = [
       "Built for long-term capital appreciation",
     ],
     image:
-      "https://images.unsplash.com/photo-1621831337128-35676ca30868?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2ODh8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBjb21tZXJjaWFsJTIwb2ZmaWNlJTIwYnVpbGRpbmclMjBleHRlcmlvcnxlbnwwfHx8fDE3ODA0ODI4MDd8MA&ixlib=rb-4.1.0&q=85",
+      "https://customer-assets.emergentagent.com/job_launch-demo-5/artifacts/19ncerm3_commercial.png",
   },
   {
     key: "retail",
@@ -28,7 +28,7 @@ const TYPES = [
       "Optimised lease structures and ROI",
     ],
     image:
-      "https://images.pexels.com/photos/8122150/pexels-photo-8122150.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=900&w=940",
+      "https://customer-assets.emergentagent.com/job_launch-demo-5/artifacts/k0cuzjoa_retail.png",
   },
   {
     key: "land",

@@ -7,6 +7,7 @@ import WhyMarq from "@/components/marq/WhyMarq";
 import Featured from "@/components/marq/Featured";
 import HowToConnect from "@/components/marq/HowToConnect";
 import PropertyEnquiry from "@/components/marq/PropertyEnquiry";
+import ExpertsPanel from "@/components/marq/ExpertsPanel";
 import AdvisorForm from "@/components/marq/AdvisorForm";
 import Testimonials from "@/components/marq/Testimonials";
 import InstaFeed from "@/components/marq/InstaFeed";
@@ -25,6 +26,7 @@ export default function Home() {
         <Featured />
         <PropertyEnquiry />
         <HowToConnect />
+        <ExpertsPanel />
         <AdvisorForm />
         <Testimonials />
         <InstaFeed />

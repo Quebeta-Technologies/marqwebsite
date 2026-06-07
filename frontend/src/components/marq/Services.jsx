@@ -50,7 +50,6 @@ const ITEMS = [
 
 function handleServiceClick(e, requirement) {
   e.preventDefault();
-  // Notify AdvisorForm to preset the requirement dropdown
   window.dispatchEvent(
     new CustomEvent("marq:setRequirement", { detail: requirement })
   );
@@ -110,46 +109,42 @@ export default function Services() {
               <article
                 key={s.key}
                 data-testid={`service-${s.key}`}
-                className="group relative bg-white border border-[var(--marq-line)] p-8 lg:p-10 hover:-translate-y-1 transition-all duration-500 hover:shadow-[0_30px_60px_-30px_rgba(13,13,13,0.25)] overflow-hidden flex flex-col"
+                className="group relative bg-white border border-[var(--marq-line)] p-8 lg:p-10 hover:-translate-y-1 transition-all duration-500 hover:shadow-[0_30px_60px_-30px_rgba(13,13,13,0.25)] overflow-hidden"
               >
                 <span className="absolute top-0 left-0 h-[2px] w-0 bg-[var(--marq-gold)] group-hover:w-full transition-all duration-700" />
 
-                <div className="flex items-start justify-between gap-6">
-                  <div>
-                    <div className="text-overline text-[var(--marq-gold-deep)]">
+                {/* Header row: number + title + inline button */}
+                <div className="flex items-center justify-between gap-4 flex-wrap">
+                  <div className="flex items-baseline gap-4 min-w-0">
+                    <span className="text-overline text-[var(--marq-gold-deep)] flex-shrink-0">
                       {s.num}
-                    </div>
-                    <h3 className="mt-4 font-display text-3xl sm:text-4xl text-[var(--marq-ink)] leading-tight">
+                    </span>
+                    <h3 className="font-display text-3xl sm:text-4xl text-[var(--marq-ink)] leading-tight">
                       {s.title}
                     </h3>
                   </div>
-                  <span className="w-14 h-14 flex-shrink-0 flex items-center justify-center border border-[var(--marq-line)] group-hover:border-[var(--marq-gold)] group-hover:bg-[var(--marq-gold)] transition-all duration-500">
-                    <Icon
-                      size={22}
-                      strokeWidth={1.3}
-                      className="text-[var(--marq-ink)] group-hover:text-white transition-colors duration-500"
-                    />
-                  </span>
-                </div>
-
-                <p className="mt-6 font-italic-serif text-xl text-[var(--marq-gold-deep)] leading-snug">
-                  {s.tagline}
-                </p>
-                <p className="mt-4 text-sm text-[var(--marq-ink-2)] leading-relaxed">
-                  {s.body}
-                </p>
-
-                <div className="mt-auto pt-8">
                   <button
                     type="button"
                     data-testid={`service-${s.key}-cta`}
                     onClick={(e) => handleServiceClick(e, s.requirement)}
-                    className="btn-gold"
+                    className="btn-gold !px-5 !py-2.5 !text-[10px] flex-shrink-0"
                   >
                     {s.cta}
-                    <ArrowRight size={15} strokeWidth={1.5} />
+                    <ArrowRight size={13} strokeWidth={1.5} />
                   </button>
                 </div>
+
+                <p className="mt-6 font-italic-serif text-xl text-[var(--marq-gold-deep)] leading-snug flex items-start gap-3">
+                  <Icon
+                    size={18}
+                    strokeWidth={1.4}
+                    className="text-[var(--marq-gold)] mt-1.5 flex-shrink-0"
+                  />
+                  <span>{s.tagline}</span>
+                </p>
+                <p className="mt-4 text-sm text-[var(--marq-ink-2)] leading-relaxed">
+                  {s.body}
+                </p>
               </article>
             );
           })}
