@@ -5,12 +5,14 @@ import { ArrowRight } from "lucide-react";
 
 /**
  * Compact enquiry form used in Hero & Property Enquiry sections.
- * Props:
- *  - source: "hero" | "property"
- *  - testIdPrefix: string for unique data-testids
- *  - typeOptions: array of property type strings
- *  - purposeOptions: array of purpose strings (e.g. ["Buy", "Sell", "Lease", "JV"])
- *  - showEmail: boolean — render an email field
+ * When showEmail is true the layout becomes:
+ *   Row 1: For + Type
+ *   Row 2: Full Name (single row)
+ *   Row 3: Email + Mobile
+ * Otherwise (default):
+ *   Row 1: For + Type
+ *   Row 2: Name (full)
+ *   Row 3: Mobile (full)
  */
 export default function EnquiryForm({
   source,
@@ -61,6 +63,7 @@ export default function EnquiryForm({
       className="space-y-5"
     >
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        {/* Row 1: For + Type */}
         <div>
           <label className="text-overline text-[var(--marq-mute)] block mb-1">
             For
@@ -97,9 +100,11 @@ export default function EnquiryForm({
             ))}
           </select>
         </div>
-        <div className={showEmail ? "" : "sm:col-span-2"}>
+
+        {/* Row 2: Full Name (always full width) */}
+        <div className="sm:col-span-2">
           <label className="text-overline text-[var(--marq-mute)] block mb-1">
-            Name
+            Full Name
           </label>
           <input
             data-testid={`${testIdPrefix}-name`}
@@ -110,6 +115,8 @@ export default function EnquiryForm({
             onChange={(e) => update("name", e.target.value)}
           />
         </div>
+
+        {/* Row 3: Email + Mobile when showEmail, else Mobile full */}
         {showEmail && (
           <div>
             <label className="text-overline text-[var(--marq-mute)] block mb-1">
@@ -125,7 +132,7 @@ export default function EnquiryForm({
             />
           </div>
         )}
-        <div className="sm:col-span-2">
+        <div className={showEmail ? "" : "sm:col-span-2"}>
           <label className="text-overline text-[var(--marq-mute)] block mb-1">
             Mobile No.
           </label>

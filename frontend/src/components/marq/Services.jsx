@@ -1,5 +1,5 @@
 import useReveal from "@/hooks/useReveal";
-import { Building2, TrendingUp, Handshake, Store } from "lucide-react";
+import { Building2, TrendingUp, Handshake, Store, ArrowRight } from "lucide-react";
 
 const ITEMS = [
   {
@@ -10,6 +10,8 @@ const ITEMS = [
     tagline: "Acquire the right asset with confidence.",
     body:
       "We help identify high-potential opportunities, evaluate market dynamics, conduct due diligence, and negotiate effectively — ensuring every acquisition aligns with your objectives and long-term vision.",
+    cta: "Buy Now",
+    requirement: "Buy",
   },
   {
     key: "sell",
@@ -19,6 +21,8 @@ const ITEMS = [
     tagline: "Maximize value through strategic positioning.",
     body:
       "From pricing and market presentation to buyer engagement and negotiations, we help unlock the full value of your property while ensuring a seamless transaction process.",
+    cta: "Sell Now",
+    requirement: "Sell",
   },
   {
     key: "lease",
@@ -28,6 +32,8 @@ const ITEMS = [
     tagline: "Connect the right property with the right occupier.",
     body:
       "We assist property owners, developers, and businesses with tailored leasing solutions, helping secure quality tenants, optimize occupancy, and create sustainable value.",
+    cta: "Lease Now",
+    requirement: "Lease",
   },
   {
     key: "jv",
@@ -37,8 +43,20 @@ const ITEMS = [
     tagline: "Unlock the potential of land and development opportunities.",
     body:
       "We facilitate strategic partnerships between landowners and developers, helping assess feasibility, structure agreements, and create projects that generate long-term value for all stakeholders.",
+    cta: "JV Now",
+    requirement: "Joint Venture",
   },
 ];
+
+function handleServiceClick(e, requirement) {
+  e.preventDefault();
+  // Notify AdvisorForm to preset the requirement dropdown
+  window.dispatchEvent(
+    new CustomEvent("marq:setRequirement", { detail: requirement })
+  );
+  const target = document.getElementById("advisor");
+  if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+}
 
 export default function Services() {
   const ref = useReveal();
@@ -68,7 +86,8 @@ export default function Services() {
               </span>
             </div>
             <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl leading-[1.05] text-[var(--marq-ink)]">
-              Strategic{" "}
+              Strategic
+              <br />
               <span className="font-italic-serif text-[var(--marq-gold)]">
                 real estate advisory.
               </span>
@@ -91,9 +110,8 @@ export default function Services() {
               <article
                 key={s.key}
                 data-testid={`service-${s.key}`}
-                className="group relative bg-white border border-[var(--marq-line)] p-8 lg:p-10 hover:-translate-y-1 transition-all duration-500 hover:shadow-[0_30px_60px_-30px_rgba(13,13,13,0.25)] overflow-hidden"
+                className="group relative bg-white border border-[var(--marq-line)] p-8 lg:p-10 hover:-translate-y-1 transition-all duration-500 hover:shadow-[0_30px_60px_-30px_rgba(13,13,13,0.25)] overflow-hidden flex flex-col"
               >
-                {/* Animated gold accent */}
                 <span className="absolute top-0 left-0 h-[2px] w-0 bg-[var(--marq-gold)] group-hover:w-full transition-all duration-700" />
 
                 <div className="flex items-start justify-between gap-6">
@@ -120,6 +138,18 @@ export default function Services() {
                 <p className="mt-4 text-sm text-[var(--marq-ink-2)] leading-relaxed">
                   {s.body}
                 </p>
+
+                <div className="mt-auto pt-8">
+                  <button
+                    type="button"
+                    data-testid={`service-${s.key}-cta`}
+                    onClick={(e) => handleServiceClick(e, s.requirement)}
+                    className="btn-gold"
+                  >
+                    {s.cta}
+                    <ArrowRight size={15} strokeWidth={1.5} />
+                  </button>
+                </div>
               </article>
             );
           })}

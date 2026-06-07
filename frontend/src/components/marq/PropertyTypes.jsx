@@ -63,11 +63,6 @@ export default function PropertyTypes() {
   const [active, setActive] = useState(0);
   const current = TYPES[active];
 
-  // Build deck order — other cards excluding active
-  const deck = TYPES.map((t, i) => ({ ...t, originalIndex: i })).filter(
-    (t) => t.originalIndex !== active
-  );
-
   return (
     <section
       id="types"
@@ -78,7 +73,7 @@ export default function PropertyTypes() {
         ref={ref}
         className="reveal max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32"
       >
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-end mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-end mb-12">
           <div className="lg:col-span-7">
             <div className="flex items-center gap-3 mb-5">
               <span className="gold-rule" />
@@ -99,92 +94,32 @@ export default function PropertyTypes() {
           </p>
         </div>
 
-        {/* Featured + deck layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
-          {/* Active full card */}
-          <div className="lg:col-span-9 relative">
-            <AnimatePresence mode="wait">
-              <motion.article
-                key={current.key}
-                initial={{ opacity: 0, y: 24, scale: 0.98 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -16, scale: 0.98 }}
-                transition={{ duration: 0.5, ease: [0.2, 0.7, 0.2, 1] }}
-                data-testid={`type-active-${current.key}`}
-                className="grid grid-cols-1 md:grid-cols-2 bg-white border border-[var(--marq-line)] overflow-hidden min-h-[480px] shadow-[0_30px_60px_-30px_rgba(13,13,13,0.18)]"
-              >
-                <div className="relative overflow-hidden bg-[var(--marq-sand)] order-1 md:order-1">
-                  <img
-                    src={current.image}
-                    alt={current.title}
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
-                  <span className="absolute top-5 left-5 text-overline bg-[var(--marq-ink)] text-[var(--marq-gold-2)] px-3 py-1.5">
-                    0{active + 1} · {current.tag}
-                  </span>
-                </div>
-                <div className="p-8 lg:p-12 flex flex-col order-2 md:order-2">
-                  <div className="text-overline text-[var(--marq-gold-deep)]">
-                    {current.tag}
-                  </div>
-                  <h3 className="mt-4 font-display text-4xl lg:text-5xl text-[var(--marq-ink)] leading-[1.05]">
-                    {current.title}
-                  </h3>
-                  <p className="mt-5 text-base text-[var(--marq-ink-2)] leading-relaxed">
-                    {current.line}
-                  </p>
-                  <ul className="mt-7 space-y-3.5">
-                    {current.bullets.map((b) => (
-                      <li key={b} className="flex items-start gap-3 text-sm">
-                        <span className="w-5 h-5 mt-0.5 flex-shrink-0 flex items-center justify-center bg-[var(--marq-ink)] text-[var(--marq-gold-2)]">
-                          <Check size={11} strokeWidth={2.2} />
-                        </span>
-                        <span className="text-[var(--marq-ink-2)] leading-snug">
-                          {b}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="mt-auto pt-10">
-                    <a
-                      href="#enquire"
-                      data-testid={`type-${current.key}-cta`}
-                      className="btn-gold"
-                    >
-                      Explore Now
-                      <ArrowRight size={15} strokeWidth={1.5} />
-                    </a>
-                  </div>
-                </div>
-              </motion.article>
-            </AnimatePresence>
+        {/* Browse tabs on top */}
+        <div className="mb-8">
+          <div className="text-overline text-[var(--marq-mute)] mb-4">
+            Browse
           </div>
-
-          {/* Deck of remaining cards */}
-          <div className="lg:col-span-3 relative">
-            <div className="text-overline text-[var(--marq-mute)] mb-4">
-              Browse
-            </div>
-            <div className="relative flex flex-col gap-3">
-              {deck.map((t, i) => (
-                <motion.button
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
+            {TYPES.map((t, i) => {
+              const selected = i === active;
+              return (
+                <button
                   key={t.key}
                   type="button"
-                  layout
-                  initial={false}
-                  data-testid={`type-deck-${t.key}`}
-                  onClick={() => setActive(t.originalIndex)}
-                  whileHover={{ x: -6 }}
-                  transition={{ duration: 0.35, ease: [0.2, 0.7, 0.2, 1] }}
-                  style={{
-                    marginTop: i === 0 ? 0 : -28,
-                    zIndex: deck.length - i,
-                  }}
-                  className="group relative w-full text-left bg-white border border-[var(--marq-line)] overflow-hidden hover:border-[var(--marq-gold)] hover:shadow-[0_20px_40px_-20px_rgba(13,13,13,0.35)] transition-all duration-500"
+                  data-testid={`type-tab-${t.key}`}
+                  aria-selected={selected}
+                  onClick={() => setActive(i)}
+                  className={`group relative text-left border transition-all duration-500 overflow-hidden ${
+                    selected
+                      ? "bg-[var(--marq-ink)] text-white border-[var(--marq-ink)] shadow-[0_20px_40px_-20px_rgba(13,13,13,0.35)]"
+                      : "bg-white text-[var(--marq-ink)] border-[var(--marq-line)] hover:border-[var(--marq-gold)] hover:-translate-y-1"
+                  }`}
                 >
+                  {selected && (
+                    <span className="absolute top-0 left-0 h-[2px] w-full bg-[var(--marq-gold-2)]" />
+                  )}
                   <div className="flex items-center gap-4 p-3 pr-4">
-                    <div className="relative w-20 h-20 flex-shrink-0 overflow-hidden bg-[var(--marq-sand)]">
+                    <div className="relative w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 overflow-hidden bg-[var(--marq-sand)]">
                       <img
                         src={t.image}
                         alt={t.title}
@@ -192,26 +127,90 @@ export default function PropertyTypes() {
                       />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="text-[10px] tracking-[0.2em] uppercase text-[var(--marq-mute)]">
-                        0{t.originalIndex + 1}
+                      <div
+                        className={`text-[10px] tracking-[0.2em] uppercase ${
+                          selected ? "text-[var(--marq-gold-2)]" : "text-[var(--marq-mute)]"
+                        }`}
+                      >
+                        0{i + 1}
+                        {selected && " · Selected"}
                       </div>
-                      <div className="font-display text-lg text-[var(--marq-ink)] leading-tight">
+                      <div className="font-display text-lg leading-tight mt-0.5">
                         {t.title}
                       </div>
-                      <div className="mt-0.5 text-[11px] text-[var(--marq-mute)] truncate">
+                      <div
+                        className={`mt-0.5 text-[11px] truncate ${
+                          selected ? "text-white/60" : "text-[var(--marq-mute)]"
+                        }`}
+                      >
                         {t.tag}
                       </div>
                     </div>
-                    <ArrowRight
-                      size={16}
-                      strokeWidth={1.4}
-                      className="text-[var(--marq-mute)] group-hover:text-[var(--marq-gold)] group-hover:translate-x-1 transition-all duration-300 flex-shrink-0"
-                    />
                   </div>
-                </motion.button>
-              ))}
-            </div>
+                </button>
+              );
+            })}
           </div>
+        </div>
+
+        {/* Active full card */}
+        <div className="relative">
+          <AnimatePresence mode="wait">
+            <motion.article
+              key={current.key}
+              initial={{ opacity: 0, y: 24, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -16, scale: 0.98 }}
+              transition={{ duration: 0.5, ease: [0.2, 0.7, 0.2, 1] }}
+              data-testid={`type-active-${current.key}`}
+              className="grid grid-cols-1 md:grid-cols-2 bg-white border border-[var(--marq-line)] overflow-hidden min-h-[460px] shadow-[0_30px_60px_-30px_rgba(13,13,13,0.18)]"
+            >
+              <div className="relative overflow-hidden bg-[var(--marq-sand)] order-1 md:order-1 min-h-[300px]">
+                <img
+                  src={current.image}
+                  alt={current.title}
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
+                <span className="absolute top-5 left-5 text-overline bg-[var(--marq-ink)] text-[var(--marq-gold-2)] px-3 py-1.5">
+                  0{active + 1} · {current.tag}
+                </span>
+              </div>
+              <div className="p-8 lg:p-12 flex flex-col order-2 md:order-2">
+                <div className="text-overline text-[var(--marq-gold-deep)]">
+                  {current.tag}
+                </div>
+                <h3 className="mt-4 font-display text-4xl lg:text-5xl text-[var(--marq-ink)] leading-[1.05]">
+                  {current.title}
+                </h3>
+                <p className="mt-5 text-base text-[var(--marq-ink-2)] leading-relaxed">
+                  {current.line}
+                </p>
+                <ul className="mt-7 space-y-3.5">
+                  {current.bullets.map((b) => (
+                    <li key={b} className="flex items-start gap-3 text-sm">
+                      <span className="w-5 h-5 mt-0.5 flex-shrink-0 flex items-center justify-center bg-[var(--marq-ink)] text-[var(--marq-gold-2)]">
+                        <Check size={11} strokeWidth={2.2} />
+                      </span>
+                      <span className="text-[var(--marq-ink-2)] leading-snug">
+                        {b}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-auto pt-10">
+                  <a
+                    href="#enquire"
+                    data-testid={`type-${current.key}-cta`}
+                    className="btn-gold"
+                  >
+                    Explore Now
+                    <ArrowRight size={15} strokeWidth={1.5} />
+                  </a>
+                </div>
+              </div>
+            </motion.article>
+          </AnimatePresence>
         </div>
       </div>
     </section>

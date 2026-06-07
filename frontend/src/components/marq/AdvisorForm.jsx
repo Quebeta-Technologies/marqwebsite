@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import useReveal from "@/hooks/useReveal";
 import { submitEnquiry } from "@/lib/api";
@@ -24,8 +24,25 @@ export default function AdvisorForm() {
     requirement: "",
   });
   const [submitting, setSubmitting] = useState(false);
+  const [highlight, setHighlight] = useState(false);
 
   const update = (k, v) => setForm((f) => ({ ...f, [k]: v }));
+
+  // Listen for service-card clicks to preset the requirement
+  useEffect(() => {
+    const onSetRequirement = (e) => {
+      const value = e?.detail;
+      if (typeof value !== "string") return;
+      if (!REQUIREMENTS.includes(value)) return;
+      setForm((f) => ({ ...f, requirement: value }));
+      setHighlight(true);
+      const t = setTimeout(() => setHighlight(false), 1800);
+      return () => clearTimeout(t);
+    };
+    window.addEventListener("marq:setRequirement", onSetRequirement);
+    return () =>
+      window.removeEventListener("marq:setRequirement", onSetRequirement);
+  }, []);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -183,7 +200,11 @@ export default function AdvisorForm() {
                   </label>
                   <select
                     data-testid="advisor-requirement"
-                    className="marq-input"
+                    className={`marq-input transition-all duration-500 ${
+                      highlight
+                        ? "!border-b-[var(--marq-gold)] bg-[var(--marq-gold-soft)]"
+                        : ""
+                    }`}
                     value={form.requirement}
                     onChange={(e) => update("requirement", e.target.value)}
                   >

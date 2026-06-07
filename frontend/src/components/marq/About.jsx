@@ -126,16 +126,6 @@ export default function About() {
                 );
               })}
             </ul>
-
-            <div className="mt-10">
-              <a
-                href="#advisor"
-                data-testid="about-cta"
-                className="btn-outline"
-              >
-                Schedule a Consultation
-              </a>
-            </div>
           </div>
         </div>
 

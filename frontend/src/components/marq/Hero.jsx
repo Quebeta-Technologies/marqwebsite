@@ -49,12 +49,13 @@ export default function Hero() {
     <section
       id="home"
       data-testid="hero-section"
-      className="relative w-full bg-[var(--marq-ink)]"
+      className="relative w-full bg-[var(--marq-ivory)] pt-6 sm:pt-8"
     >
-      <div
-        ref={emblaRef}
-        className="embla relative w-full h-[100svh] min-h-[640px] max-h-[900px]"
-      >
+      <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          ref={emblaRef}
+          className="embla relative w-full h-[640px] sm:h-[720px] lg:h-[780px] overflow-hidden"
+        >
         <div className="embla__container h-full">
           {SLIDES.map((s, i) => (
             <div
@@ -185,6 +186,7 @@ export default function Hero() {
           <span className="mx-2 opacity-40">/</span>
           <span>{String(SLIDES.length).padStart(2, "0")}</span>
         </div>
+      </div>
       </div>
 
       {/* Mobile enquiry card (below carousel) */}
