@@ -47,8 +47,11 @@ export default function WhyMarq() {
                 The MARQ Difference
               </span>
             </div>
-            <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl leading-[1.02]">
-              Why <span className="text-[var(--marq-gold)] italic">MARQ</span>
+            <h2 className="font-display text-4xl sm:text-5xl lg:text-7xl leading-[1.02]">
+              Why{" "}
+              <span className="font-italic-serif text-[var(--marq-gold)]">
+                MARQ
+              </span>
             </h2>
           </div>
           <div className="lg:col-span-7">
@@ -66,10 +69,10 @@ export default function WhyMarq() {
               data-testid={`why-${p.letter.toLowerCase()}`}
               className="bg-[var(--marq-ink)] p-10 group hover:bg-[#111111] transition-colors duration-300"
             >
-              <div className="font-serif text-7xl text-[var(--marq-gold)] leading-none group-hover:scale-105 transition-transform duration-500 origin-left">
+              <div className="font-display text-8xl text-[var(--marq-gold)] leading-none group-hover:scale-105 transition-transform duration-500 origin-left">
                 {p.letter}
               </div>
-              <h3 className="mt-6 font-serif text-2xl text-white">
+              <h3 className="mt-6 font-display text-2xl text-white">
                 {p.title}
               </h3>
               <div className="mt-3 h-px w-10 bg-[var(--marq-gold)]" />

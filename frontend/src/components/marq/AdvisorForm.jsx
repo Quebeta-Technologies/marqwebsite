@@ -78,10 +78,10 @@ export default function AdvisorForm() {
                 Property Experts
               </span>
             </div>
-            <h2 className="font-serif text-4xl sm:text-5xl leading-[1.05] text-[var(--marq-ink)]">
+            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl leading-[1.02] text-[var(--marq-ink)]">
               Talk to a{" "}
-              <span className="italic text-[var(--marq-gold)]">
-                Property Advisor
+              <span className="font-italic-serif text-[var(--marq-gold)]">
+                property advisor
               </span>
             </h2>
             <p className="mt-5 text-lg font-light text-[var(--marq-ink-2)]">

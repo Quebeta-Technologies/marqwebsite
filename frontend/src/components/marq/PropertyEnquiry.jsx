@@ -21,12 +21,12 @@ export default function PropertyEnquiry() {
                 Property Enquiry
               </span>
             </div>
-            <h2 className="font-serif text-4xl sm:text-5xl leading-[1.05] text-[var(--marq-ink)]">
+            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl leading-[1.02] text-[var(--marq-ink)]">
               Looking to Buy, Sell, or Explore a{" "}
-              <span className="italic text-[var(--marq-gold)]">
+              <span className="font-italic-serif text-[var(--marq-gold)]">
                 JV Opportunity?
               </span>{" "}
-              Get Expert Guidance Today.
+              Get expert guidance today.
             </h2>
             <p className="mt-6 max-w-xl text-base text-[var(--marq-ink-2)] leading-relaxed">
               Contact us now to explore the right property and investment
@@ -41,8 +41,11 @@ export default function PropertyEnquiry() {
                 <div className="text-overline text-[var(--marq-gold)] mb-3">
                   Quick Enquiry
                 </div>
-                <h3 className="font-serif text-3xl text-[var(--marq-ink)] leading-tight">
-                  Tell us what you’re looking for
+                <h3 className="font-display text-3xl text-[var(--marq-ink)] leading-tight">
+                  Tell us what you&rsquo;re{" "}
+                  <span className="font-italic-serif text-[var(--marq-gold-deep)]">
+                    looking for
+                  </span>
                 </h3>
               </div>
               <EnquiryForm

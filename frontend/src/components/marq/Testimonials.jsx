@@ -47,9 +47,11 @@ export default function Testimonials() {
               Client Stories
             </span>
           </div>
-          <h2 className="font-serif text-4xl sm:text-5xl leading-tight text-[var(--marq-ink)]">
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl leading-[1.02] text-[var(--marq-ink)]">
             Real experiences.{" "}
-            <span className="italic text-[var(--marq-gold)]">Real outcomes.</span>
+            <span className="font-italic-serif text-[var(--marq-gold)]">
+              Real outcomes.
+            </span>
           </h2>
           <p className="mt-6 text-base text-[var(--marq-ink-2)] leading-relaxed">
             Hear directly from the people who trusted MARQ Realtors for
@@ -69,7 +71,7 @@ export default function Testimonials() {
                 strokeWidth={1.2}
                 className="text-[var(--marq-gold)]"
               />
-              <p className="mt-6 font-serif italic text-xl text-[var(--marq-ink)] leading-snug flex-1">
+              <p className="mt-6 font-italic-serif text-2xl text-[var(--marq-ink)] leading-snug flex-1">
                 “{s.quote}”
               </p>
               <div className="mt-8 flex items-center gap-4 pt-6 border-t border-[var(--marq-line)]">

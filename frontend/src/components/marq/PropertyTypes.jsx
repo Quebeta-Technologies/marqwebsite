@@ -46,8 +46,11 @@ export default function PropertyTypes() {
               Explore
             </span>
           </div>
-          <h2 className="font-serif text-4xl sm:text-5xl leading-tight text-[var(--marq-ink)]">
-            Explore Property Types
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl leading-[1.02] text-[var(--marq-ink)]">
+            Explore{" "}
+            <span className="font-italic-serif text-[var(--marq-gold)]">
+              property types
+            </span>
           </h2>
           <p className="mt-6 text-base text-[var(--marq-ink-2)] leading-relaxed">
             Discover curated real estate opportunities across high-potential
@@ -74,7 +77,7 @@ export default function PropertyTypes() {
                 </div>
               </div>
               <div className="p-8">
-                <h3 className="font-serif text-2xl text-[var(--marq-ink)]">
+                <h3 className="font-display text-2xl text-[var(--marq-ink)]">
                   {t.title}
                 </h3>
                 <div className="mt-2 h-px w-10 bg-[var(--marq-gold)]" />

@@ -1,5 +1,6 @@
 import Header from "@/components/marq/Header";
 import Hero from "@/components/marq/Hero";
+import HowToConnect from "@/components/marq/HowToConnect";
 import About from "@/components/marq/About";
 import Services from "@/components/marq/Services";
 import WhyMarq from "@/components/marq/WhyMarq";
@@ -16,6 +17,7 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
+        <HowToConnect />
         <About />
         <Services />
         <WhyMarq />

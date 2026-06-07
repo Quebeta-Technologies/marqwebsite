@@ -63,8 +63,11 @@ export default function Featured() {
                 Curated Portfolio
               </span>
             </div>
-            <h2 className="font-serif text-4xl sm:text-5xl leading-tight text-[var(--marq-ink)]">
-              Featured Investment Opportunities
+            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl leading-[1.02] text-[var(--marq-ink)]">
+              Featured{" "}
+              <span className="font-italic-serif text-[var(--marq-gold)]">
+                investment opportunities
+              </span>
             </h2>
           </div>
           <p className="lg:max-w-md text-base text-[var(--marq-ink-2)] leading-relaxed">
@@ -90,9 +93,9 @@ export default function Featured() {
                 <div className="absolute top-5 left-5 bg-[var(--marq-gold)] text-white text-overline px-3 py-1">
                   {it.tag}
                 </div>
-                <div className="absolute bottom-5 left-5 right-5 text-white">
-                  <h3 className="font-serif text-3xl">{it.title}</h3>
-                  <p className="mt-2 text-sm text-white/85 max-w-md">
+                <div className="absolute bottom-5 left-5 right-5 text-white translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                  <h3 className="font-display text-3xl">{it.title}</h3>
+                  <p className="mt-2 text-sm text-white/85 max-w-md opacity-90 group-hover:opacity-100 transition-opacity">
                     {it.body}
                   </p>
                 </div>

@@ -44,9 +44,10 @@ export default function Services() {
               What we do
             </span>
           </div>
-          <h2 className="font-serif text-4xl sm:text-5xl leading-tight text-[var(--marq-ink)]">
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl leading-[1.02] text-[var(--marq-ink)]">
             Buy <span className="text-[var(--marq-gold)]">•</span> Sell{" "}
-            <span className="text-[var(--marq-gold)]">•</span> JV
+            <span className="text-[var(--marq-gold)]">•</span>{" "}
+            <span className="font-italic-serif text-[var(--marq-gold)]">JV</span>
           </h2>
           <p className="mt-6 text-base text-[var(--marq-ink-2)] leading-relaxed">
             We help you buy, sell, and explore joint venture opportunities with
@@ -75,7 +76,7 @@ export default function Services() {
                     className="text-[var(--marq-ink)] group-hover:text-[var(--marq-gold)] transition-colors"
                   />
                 </div>
-                <h3 className="mt-8 font-serif text-3xl text-[var(--marq-ink)]">
+                <h3 className="mt-8 font-display text-3xl text-[var(--marq-ink)]">
                   {s.title}
                 </h3>
                 <div className="mt-3 h-px w-10 bg-[var(--marq-gold)]" />
