@@ -3,10 +3,16 @@ import useReveal from "@/hooks/useReveal";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, Check } from "lucide-react";
 
-const TYPES = [
+// ─────────────────────────────────────────────────────────────────────────────
+// HOW TO ADD A NEW PROJECT
+// Find the relevant tab array below (COMMERCIAL_PROJECTS, RETAIL_PROJECTS, etc.)
+// and push a new object. The UI handles the rest automatically.
+// ─────────────────────────────────────────────────────────────────────────────
+
+const COMMERCIAL_PROJECTS = [
   {
-    key: "commercial",
-    title: "Imperial Plaza",
+    id: "imperial-plaza",
+    name: "Imperial Plaza",
     tag: "Grade A · Kothrud, Pune",
     line: "Award-winning Grade A commercial project near Chandani Chowk — office spaces for sale and retail spaces for lease, with 80%+ construction complete.",
     bullets: [
@@ -15,11 +21,58 @@ const TYPES = [
       "Possession within 3–7 months · RERA: P52100028889 · CREDAI & NAREDCO member",
     ],
     image:
-      "https://www.imperialplaza.in/wp-content/uploads/2025/09/2-7.png",
+      "https://images.unsplash.com/photo-1486325212027-8081e485255e?crop=entropy&cs=srgb&fm=jpg&q=85&w=900",
   },
-  {
-    key: "retail",
-    title: "Retail",
+  // ── ADD NEXT COMMERCIAL PROJECT HERE ──
+  // {
+  //   id: "project-id",
+  //   name: "Project Name",
+  //   tag: "Grade A · Location",
+  //   line: "Short description.",
+  //   bullets: ["Bullet 1", "Bullet 2", "Bullet 3"],
+  //   image: "https://your-image-url.jpg",
+  // },
+];
+
+const RETAIL_PROJECTS = [
+  // ── ADD RETAIL PROJECTS HERE ──
+  // {
+  //   id: "project-id",
+  //   name: "Project Name",
+  //   tag: "High Street · Location",
+  //   line: "Short description.",
+  //   bullets: ["Bullet 1", "Bullet 2", "Bullet 3"],
+  //   image: "https://your-image-url.jpg",
+  // },
+];
+
+const LAND_PROJECTS = [
+  // ── ADD LAND PROJECTS HERE ──
+  // {
+  //   id: "project-id",
+  //   name: "Project Name",
+  //   tag: "Growth Corridor · Location",
+  //   line: "Short description.",
+  //   bullets: ["Bullet 1", "Bullet 2", "Bullet 3"],
+  //   image: "https://your-image-url.jpg",
+  // },
+];
+
+const RESIDENTIAL_PROJECTS = [
+  // ── ADD RESIDENTIAL PROJECTS HERE ──
+  // {
+  //   id: "project-id",
+  //   name: "Project Name",
+  //   tag: "Luxury Living · Location",
+  //   line: "Short description.",
+  //   bullets: ["Bullet 1", "Bullet 2", "Bullet 3"],
+  //   image: "https://your-image-url.jpg",
+  // },
+];
+
+// ─── PLACEHOLDER CONTENT (shown when no projects exist for a tab) ─────────────
+const PLACEHOLDERS = {
+  retail: {
     tag: "High Street · Mall",
     line: "Footfall-led retail addresses on prime high streets and inside marquee malls.",
     bullets: [
@@ -30,9 +83,7 @@ const TYPES = [
     image:
       "https://customer-assets.emergentagent.com/job_launch-demo-5/artifacts/q95t4mfq_retail.png",
   },
-  {
-    key: "land",
-    title: "Land",
+  land: {
     tag: "Growth Corridor",
     line: "Strategic land parcels positioned along Maharashtra's most active growth corridors.",
     bullets: [
@@ -43,9 +94,7 @@ const TYPES = [
     image:
       "https://customer-assets.emergentagent.com/job_launch-demo-5/artifacts/levlxt0t_land%20png.png",
   },
-  {
-    key: "residential",
-    title: "Residential",
+  residential: {
     tag: "Luxury Living",
     line: "Curated residences that pair iconic addresses with strong investment fundamentals.",
     bullets: [
@@ -56,12 +105,155 @@ const TYPES = [
     image:
       "https://customer-assets.emergentagent.com/job_launch-demo-5/artifacts/yjj88b0l_residential.png",
   },
+};
+
+// ─── TAB DEFINITIONS ─────────────────────────────────────────────────────────
+const TYPES = [
+  {
+    key: "commercial",
+    title: "Commercial",
+    tag: "Grade A · Office",
+    image: COMMERCIAL_PROJECTS[0]?.image ||
+      "https://customer-assets.emergentagent.com/job_launch-demo-5/artifacts/iuf9x9wu_commercial.png",
+    projects: COMMERCIAL_PROJECTS,
+  },
+  {
+    key: "retail",
+    title: "Retail",
+    tag: "High Street · Mall",
+    image: RETAIL_PROJECTS[0]?.image || PLACEHOLDERS.retail.image,
+    projects: RETAIL_PROJECTS,
+    placeholder: PLACEHOLDERS.retail,
+  },
+  {
+    key: "land",
+    title: "Land",
+    tag: "Growth Corridor",
+    image: LAND_PROJECTS[0]?.image || PLACEHOLDERS.land.image,
+    projects: LAND_PROJECTS,
+    placeholder: PLACEHOLDERS.land,
+  },
+  {
+    key: "residential",
+    title: "Residential",
+    tag: "Luxury Living",
+    image: RESIDENTIAL_PROJECTS[0]?.image || PLACEHOLDERS.residential.image,
+    projects: RESIDENTIAL_PROJECTS,
+    placeholder: PLACEHOLDERS.residential,
+  },
 ];
 
+// ─── PROJECT CARD ─────────────────────────────────────────────────────────────
+function ProjectCard({ project, index, tabKey }) {
+  return (
+    <article
+      data-testid={`${tabKey}-project-${project.id}`}
+      className="grid grid-cols-1 md:grid-cols-2 bg-white border border-[var(--marq-line)] overflow-hidden min-h-[460px] shadow-[0_30px_60px_-30px_rgba(13,13,13,0.18)]"
+    >
+      <div className="relative overflow-hidden bg-[var(--marq-sand)] order-1 min-h-[300px]">
+        <img
+          src={project.image}
+          alt={project.name}
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
+        <span className="absolute top-5 left-5 text-overline bg-[var(--marq-ink)] text-[var(--marq-gold-2)] px-3 py-1.5">
+          {String(index + 1).padStart(2, "0")} · {project.tag}
+        </span>
+      </div>
+      <div className="p-8 lg:p-12 flex flex-col order-2">
+        <div className="text-overline text-[var(--marq-gold-deep)]">
+          {project.tag}
+        </div>
+        <h3 className="mt-4 font-display text-4xl lg:text-5xl text-[var(--marq-ink)] leading-[1.05]">
+          {project.name}
+        </h3>
+        <p className="mt-5 text-base text-[var(--marq-ink-2)] leading-relaxed">
+          {project.line}
+        </p>
+        <ul className="mt-7 space-y-3.5">
+          {project.bullets.map((b) => (
+            <li key={b} className="flex items-start gap-3 text-sm">
+              <span className="w-5 h-5 mt-0.5 flex-shrink-0 flex items-center justify-center bg-[var(--marq-ink)] text-[var(--marq-gold-2)]">
+                <Check size={11} strokeWidth={2.2} />
+              </span>
+              <span className="text-[var(--marq-ink-2)] leading-snug">{b}</span>
+            </li>
+          ))}
+        </ul>
+        <div className="mt-auto pt-10">
+          <a
+            href="#enquire"
+            data-testid={`${tabKey}-project-${project.id}-cta`}
+            className="btn-gold"
+          >
+            Explore Now
+            <ArrowRight size={15} strokeWidth={1.5} />
+          </a>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+// ─── PLACEHOLDER CARD (no projects yet) ──────────────────────────────────────
+function PlaceholderCard({ tab, active }) {
+  const p = tab.placeholder;
+  return (
+    <article
+      data-testid={`type-active-${tab.key}`}
+      className="grid grid-cols-1 md:grid-cols-2 bg-white border border-[var(--marq-line)] overflow-hidden min-h-[460px] shadow-[0_30px_60px_-30px_rgba(13,13,13,0.18)]"
+    >
+      <div className="relative overflow-hidden bg-[var(--marq-sand)] order-1 min-h-[300px]">
+        <img
+          src={p.image}
+          alt={tab.title}
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
+        <span className="absolute top-5 left-5 text-overline bg-[var(--marq-ink)] text-[var(--marq-gold-2)] px-3 py-1.5">
+          {String(active + 1).padStart(2, "0")} · {p.tag}
+        </span>
+      </div>
+      <div className="p-8 lg:p-12 flex flex-col order-2">
+        <div className="text-overline text-[var(--marq-gold-deep)]">{p.tag}</div>
+        <h3 className="mt-4 font-display text-4xl lg:text-5xl text-[var(--marq-ink)] leading-[1.05]">
+          {tab.title}
+        </h3>
+        <p className="mt-5 text-base text-[var(--marq-ink-2)] leading-relaxed">
+          {p.line}
+        </p>
+        <ul className="mt-7 space-y-3.5">
+          {p.bullets.map((b) => (
+            <li key={b} className="flex items-start gap-3 text-sm">
+              <span className="w-5 h-5 mt-0.5 flex-shrink-0 flex items-center justify-center bg-[var(--marq-ink)] text-[var(--marq-gold-2)]">
+                <Check size={11} strokeWidth={2.2} />
+              </span>
+              <span className="text-[var(--marq-ink-2)] leading-snug">{b}</span>
+            </li>
+          ))}
+        </ul>
+        <div className="mt-auto pt-10">
+          <a
+            href="#enquire"
+            data-testid={`type-${tab.key}-cta`}
+            className="btn-gold"
+          >
+            Explore Now
+            <ArrowRight size={15} strokeWidth={1.5} />
+          </a>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+// ─── MAIN COMPONENT ───────────────────────────────────────────────────────────
 export default function PropertyTypes() {
   const ref = useReveal();
   const [active, setActive] = useState(0);
   const current = TYPES[active];
+  const hasProjects = current.projects.length > 0;
 
   return (
     <section
@@ -94,14 +286,13 @@ export default function PropertyTypes() {
           </p>
         </div>
 
-        {/* Browse tabs on top */}
+        {/* Browse tabs */}
         <div className="mb-8">
-          <div className="text-overline text-[var(--marq-mute)] mb-4">
-            Browse
-          </div>
+          <div className="text-overline text-[var(--marq-mute)] mb-4">Browse</div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
             {TYPES.map((t, i) => {
               const selected = i === active;
+              const count = t.projects.length;
               return (
                 <button
                   key={t.key}
@@ -133,7 +324,8 @@ export default function PropertyTypes() {
                         }`}
                       >
                         0{i + 1}
-                        {selected && " · Selected"}
+                        {selected && count > 0 && ` · ${count} project${count > 1 ? "s" : ""}`}
+                        {selected && count === 0 && " · Selected"}
                       </div>
                       <div className="font-display text-lg leading-tight mt-0.5">
                         {t.title}
@@ -153,63 +345,31 @@ export default function PropertyTypes() {
           </div>
         </div>
 
-        {/* Active full card */}
+        {/* Active panel */}
         <div className="relative">
           <AnimatePresence mode="wait">
-            <motion.article
+            <motion.div
               key={current.key}
-              initial={{ opacity: 0, y: 24, scale: 0.98 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -16, scale: 0.98 }}
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -16 }}
               transition={{ duration: 0.5, ease: [0.2, 0.7, 0.2, 1] }}
-              data-testid={`type-active-${current.key}`}
-              className="grid grid-cols-1 md:grid-cols-2 bg-white border border-[var(--marq-line)] overflow-hidden min-h-[460px] shadow-[0_30px_60px_-30px_rgba(13,13,13,0.18)]"
             >
-              <div className="relative overflow-hidden bg-[var(--marq-sand)] order-1 md:order-1 min-h-[300px]">
-                <img
-                  src={current.image}
-                  alt={current.title}
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
-                <span className="absolute top-5 left-5 text-overline bg-[var(--marq-ink)] text-[var(--marq-gold-2)] px-3 py-1.5">
-                  0{active + 1} · {current.tag}
-                </span>
-              </div>
-              <div className="p-8 lg:p-12 flex flex-col order-2 md:order-2">
-                <div className="text-overline text-[var(--marq-gold-deep)]">
-                  {current.tag}
-                </div>
-                <h3 className="mt-4 font-display text-4xl lg:text-5xl text-[var(--marq-ink)] leading-[1.05]">
-                  {current.title}
-                </h3>
-                <p className="mt-5 text-base text-[var(--marq-ink-2)] leading-relaxed">
-                  {current.line}
-                </p>
-                <ul className="mt-7 space-y-3.5">
-                  {current.bullets.map((b) => (
-                    <li key={b} className="flex items-start gap-3 text-sm">
-                      <span className="w-5 h-5 mt-0.5 flex-shrink-0 flex items-center justify-center bg-[var(--marq-ink)] text-[var(--marq-gold-2)]">
-                        <Check size={11} strokeWidth={2.2} />
-                      </span>
-                      <span className="text-[var(--marq-ink-2)] leading-snug">
-                        {b}
-                      </span>
-                    </li>
+              {hasProjects ? (
+                <div className="flex flex-col gap-6">
+                  {current.projects.map((project, i) => (
+                    <ProjectCard
+                      key={project.id}
+                      project={project}
+                      index={i}
+                      tabKey={current.key}
+                    />
                   ))}
-                </ul>
-                <div className="mt-auto pt-10">
-                  <a
-                    href="#enquire"
-                    data-testid={`type-${current.key}-cta`}
-                    className="btn-gold"
-                  >
-                    Explore Now
-                    <ArrowRight size={15} strokeWidth={1.5} />
-                  </a>
                 </div>
-              </div>
-            </motion.article>
+              ) : (
+                <PlaceholderCard tab={current} active={active} />
+              )}
+            </motion.div>
           </AnimatePresence>
         </div>
       </div>
