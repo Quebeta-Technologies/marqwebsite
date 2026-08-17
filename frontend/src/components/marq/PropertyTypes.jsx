@@ -6,16 +6,16 @@ import { ArrowRight, Check } from "lucide-react";
 const TYPES = [
   {
     key: "commercial",
-    title: "Commercial",
-    tag: "Grade A · Office",
-    line: "Premium commercial spaces engineered for visibility, productivity and long-term yield.",
+    title: "Imperial Plaza",
+    tag: "Grade A · Kothrud, Pune",
+    line: "Award-winning Grade A commercial project near Chandani Chowk — office spaces for sale and retail spaces for lease, with 80%+ construction complete.",
     bullets: [
-      "Grade-A offices in CBDs & IT corridors",
-      "Strong rental potential and tenant demand",
-      "Built for long-term capital appreciation",
+      "Office: 950–2,700 sq ft for sale | Retail: 11,000–39,000 sq ft for lease",
+      "Prime location on Bangalore Highway, Kothrud — excellent connectivity & visibility",
+      "Possession within 3–7 months · RERA: P52100028889 · CREDAI & NAREDCO member",
     ],
     image:
-      "https://customer-assets.emergentagent.com/job_launch-demo-5/artifacts/iuf9x9wu_commercial.png",
+      "https://www.imperialplaza.in/wp-content/uploads/2025/09/2-7.png",
   },
   {
     key: "retail",
