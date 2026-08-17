@@ -59,6 +59,19 @@ const LAND_PROJECTS = [
 ];
 
 const RESIDENTIAL_PROJECTS = [
+  {
+    id: "crown-8",
+    name: "Crown 8",
+    tag: "Luxury Residential · Balewadi, Pune",
+    line: "100+ metre ultra-premium high-rise by Pyramid Lifestyle on Balewadi High Street — exclusive 3 BHK homes designed for sophistication, space, and an elevated lifestyle.",
+    bullets: [
+      "Exclusive 3 BHK premium flats · Balewadi High Street, near Baner",
+      "Rooftop infinity pool, sky walk, banquet hall, gym & 25+ world-class amenities",
+      "MahaRERA: P52100055233 · Jupiter Hospital 2 km · Phoenix Mall 7 km",
+    ],
+    image:
+      "https://pyramidlifestyle.com/projects/crown8/3bhk-in-balewadi/slider/april-26/crown-8-pyramid-lifestyle-1.webp",
+  },
   // ── ADD RESIDENTIAL PROJECTS HERE ──
   // {
   //   id: "project-id",
