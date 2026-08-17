@@ -21,7 +21,7 @@ const COMMERCIAL_PROJECTS = [
       "Possession within 3–7 months · RERA: P52100028889 · CREDAI & NAREDCO member",
     ],
     image:
-      "https://images.unsplash.com/photo-1486325212027-8081e485255e?crop=entropy&cs=srgb&fm=jpg&q=85&w=900",
+      "/imperial.jpg",
   },
   // ── ADD NEXT COMMERCIAL PROJECT HERE ──
   // {
@@ -70,7 +70,7 @@ const RESIDENTIAL_PROJECTS = [
       "MahaRERA: P52100055233 · Jupiter Hospital 2 km · Phoenix Mall 7 km",
     ],
     image:
-      "https://pyramidlifestyle.com/projects/crown8/3bhk-in-balewadi/slider/april-26/crown-8-pyramid-lifestyle-1.webp",
+      "/balewadi.jpg",
   },
   // ── ADD RESIDENTIAL PROJECTS HERE ──
   // {
